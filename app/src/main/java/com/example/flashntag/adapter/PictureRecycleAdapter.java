@@ -17,10 +17,13 @@ import com.example.flashntag.modeller.Picture;
 import java.util.List;
 
 public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleAdapter.PictureViewHolder>{
-    private  static final String TAG = PictureRecycleAdapter.class.getSimpleName()
+    private  static final String TAG = PictureRecycleAdapter.class.getSimpleName();
     public List<Picture> pictureList;
     public LayoutInflater inflater;
 
+
+
+    //Picturelist er generert fra getData() i Picture klassen
     public PictureRecycleAdapter(Context context, List<Picture> pictureList){
        this.inflater = LayoutInflater.from(context);
        this.pictureList = pictureList;
@@ -32,7 +35,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     public PictureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
         Log.d(TAG, "onCreateViewHolder");
 
-        View itemview = inflater.inflate(R.layout.picturelist, parent);
+        View itemview = inflater.inflate(R.layout.picturelist, parent, false);
 
 
         return new PictureViewHolder(itemview);
