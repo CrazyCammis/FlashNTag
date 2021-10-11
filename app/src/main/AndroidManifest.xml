@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlashNTag">
         <activity
+            android:name=".PictureSelected"
+            android:exported="true" />
+        <activity
             android:name=".Viewer"
             android:exported="true" />
         <activity

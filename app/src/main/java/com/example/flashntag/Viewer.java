@@ -34,7 +34,7 @@ public class Viewer extends AppCompatActivity {
 
         pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData()));
 
-        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3);
+        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
 
     }
 }

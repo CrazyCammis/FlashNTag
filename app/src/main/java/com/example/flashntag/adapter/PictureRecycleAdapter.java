@@ -1,6 +1,7 @@
 package com.example.flashntag.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flashntag.PictureSelected;
 import com.example.flashntag.R;
 import com.example.flashntag.modeller.Picture;
 
@@ -56,7 +58,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         return pictureList.size();
     }
 
-    public class PictureViewHolder extends RecyclerView.ViewHolder{
+    public class PictureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView typeTextView;
         private ImageView pictureImageView;
 
@@ -65,6 +67,10 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
             typeTextView = itemView.findViewById(R.id.pictureImageView);
 
+
+
+            itemView.setOnClickListener(this);
+
         }
 
 
@@ -72,7 +78,19 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             typeTextView.setText(pictureToShow.getFileName());
             pictureImageView.setImageResource(pictureToShow.getPictureID());
         }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent   = new Intent(view.getContext(), PictureSelected.class);
+            view.getContext().startActivity(intent);;
+
+
+
+        }
     }
+
+
+
 
 
 }
