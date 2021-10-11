@@ -5,11 +5,14 @@
       <map>
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/activity_main.xml" value="0.67" />
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/activity_main2.xml" value="0.5" />
+<<<<<<< HEAD
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/activity_picture_selected.xml" value="0.23556231003039513" />
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/activity_recycle_view.xml" value="0.33" />
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/activity_viewer.xml" value="0.33" />
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/picture_list.xml" value="0.5" />
         <entry key="..\:/mobileAppDevelopment/FlashNTag/app/src/main/res/layout/picturelist.xml" value="0.5" />
+=======
+>>>>>>> parent of 8f3f5b5 (Started recycle view)
       </map>
     </option>
   </component>
