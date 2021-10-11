@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.flashntag.PictureSelected;
+import com.example.flashntag.PictureSelectedActivity;
 import com.example.flashntag.R;
 import com.example.flashntag.modeller.Picture;
 
@@ -67,10 +67,10 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             super(itemView);
 
             typeTextView = itemView.findViewById(R.id.pictureImageText);
-            pictureImageView = itemView.findViewById(R.id.pictureImageView)
+            pictureImageView = itemView.findViewById(R.id.pictureImageView);
 
 
-
+//sets on click
             itemView.setOnClickListener(this);
 
         }
@@ -87,14 +87,12 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
         @Override
         public void onClick(View view) {
-            Intent intent   = new Intent(view.getContext(), PictureSelected.class);
+            Intent intent   = new Intent(view.getContext(), PictureSelectedActivity.class);
             view.getContext().startActivity(intent);
 
             //should get the ID from he currently selected
-            intent.getIntExtra("posision", position);
-
-
-
+            intent.putExtra("PIC_ID", position);
+            view.getContext().startActivity(intent);
         }
     }
 
