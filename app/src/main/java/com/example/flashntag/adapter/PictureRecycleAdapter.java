@@ -61,11 +61,13 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     public class PictureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView typeTextView;
         private ImageView pictureImageView;
+        private  int position;
 
         public PictureViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            typeTextView = itemView.findViewById(R.id.pictureImageView);
+            typeTextView = itemView.findViewById(R.id.pictureImageText);
+            pictureImageView = itemView.findViewById(R.id.pictureImageView)
 
 
 
@@ -74,15 +76,22 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         }
 
 
+
+        //Sets the data to show the picture
         public  void setPicture(Picture pictureToShow){
             typeTextView.setText(pictureToShow.getFileName());
             pictureImageView.setImageResource(pictureToShow.getPictureID());
+
+            this.position = position;
         }
 
         @Override
         public void onClick(View view) {
             Intent intent   = new Intent(view.getContext(), PictureSelected.class);
-            view.getContext().startActivity(intent);;
+            view.getContext().startActivity(intent);
+
+            //should get the ID from he currently selected
+            intent.getIntExtra("posision", position);
 
 
 
