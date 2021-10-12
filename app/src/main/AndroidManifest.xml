@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlashNTag">
         <activity
-<<<<<<< HEAD
+
             android:name=".PictureSelectedActivity"
             android:exported="true" />
         <activity
             android:name=".Viewer"
             android:exported="true" />
-        <activity
+
 =======
 >>>>>>> parent of 8f3f5b5 (Started recycle view)
             android:name=".MainActivity2"
