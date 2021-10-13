@@ -10,20 +10,22 @@
         android:id="@+id/addImageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Legg til bilde(r) fra galleri"
-        app:layout_constraintBottom_toTopOf="@+id/mainGuideline2"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddImage"
         app:layout_constraintStart_toEndOf="@+id/btnAddImage"
-        app:layout_constraintTop_toTopOf="@+id/mainGuideline1"
+        app:layout_constraintTop_toTopOf="@+id/btnAddImage"
         app:layout_constraintVertical_bias="0.47" />
 
     <TextView
         android:id="@+id/openCameraText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Åpne kamera"
-        app:layout_constraintBottom_toTopOf="@+id/mainGuideline3"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOpenCamera"
         app:layout_constraintStart_toEndOf="@+id/btnOpenCamera"
-        app:layout_constraintTop_toTopOf="@+id/mainGuideline2" />
+        app:layout_constraintTop_toTopOf="@+id/btnOpenCamera" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mainGuideline1"
@@ -107,9 +109,10 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Browse bilder"
-        app:layout_constraintBottom_toTopOf="@+id/mainGuidline4"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
         app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/mainGuideline3" />
+        app:layout_constraintTop_toTopOf="@+id/imageButton4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
