@@ -10,10 +10,10 @@
         android:id="@+id/addImageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Legg til bilde(r) fra galleri"
         app:layout_constraintBottom_toBottomOf="@+id/btnAddImage"
-        app:layout_constraintStart_toEndOf="@+id/btnAddImage"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddImage"
         app:layout_constraintTop_toTopOf="@+id/btnAddImage"
         app:layout_constraintVertical_bias="0.47" />
 
@@ -21,10 +21,10 @@
         android:id="@+id/openCameraText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Åpne kamera"
         app:layout_constraintBottom_toBottomOf="@+id/btnOpenCamera"
-        app:layout_constraintStart_toEndOf="@+id/btnOpenCamera"
+        app:layout_constraintEnd_toStartOf="@+id/btnOpenCamera"
         app:layout_constraintTop_toTopOf="@+id/btnOpenCamera" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -52,9 +52,10 @@
         android:id="@+id/btnAddImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:onClick="onGalleryBtnClick"
         app:layout_constraintBottom_toTopOf="@+id/mainGuideline2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mainGuideline1"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
@@ -62,31 +63,11 @@
         android:id="@+id/btnOpenCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toTopOf="@+id/mainGuideline3"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mainGuideline2"
         app:srcCompat="@android:drawable/ic_menu_camera" />
-
-    <SearchView
-        android:id="@+id/mainSearchView"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/mainGuideline1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="hint" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </SearchView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mainGuidline4"
@@ -99,9 +80,9 @@
         android:id="@+id/imageButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toTopOf="@+id/mainGuidline4"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mainGuideline3"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
@@ -109,10 +90,32 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Browse bilder"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
         app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="286dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:hint="Search tags or dates"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/mainGuideline1"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/mainGuideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
