@@ -39,7 +39,7 @@ public class Picture {
         return pictureID;
     }
 
-    public void setPictureID(int pictureID) {
+    public void setPictureID(String pictureID) {
         this.pictureID = pictureID;
     }
 
