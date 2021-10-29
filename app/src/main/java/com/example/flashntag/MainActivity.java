@@ -8,11 +8,21 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
+    ImageButton openGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        openGallery = findViewById(R.id.openGallery);
+        openGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), Viewer.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onGalleryBtnClick (View view) {

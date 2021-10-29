@@ -71,13 +71,13 @@ public class Viewer extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        createFirestoreReadListener();
+        //createFirestoreReadListener();
 
         if(fireStorelistenerRegistration != null){
             fireStorelistenerRegistration.remove();
         }
     }
-
+/*
     private void createFirestoreReadListener() {/*
         pictureReference.get().addOnCompleteListener(@NonNull Task<QuerySnapshot> task){
             if (task.isSucssesful()){
@@ -93,18 +93,19 @@ public class Viewer extends AppCompatActivity {
                 Log.d(TAG, "Error getting documents " + task.getException);
             }
         });*/
-
+/*
        fireStorelistenerRegistration =  pictureReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot quereySnapshot, @Nullable FirebaseFirestoreException e) {
                 if(e != null){
-                    Log.w(TAG, "Listened failed.", e)
+                    Log.w(TAG, "Listened failed.", e);
                     return;
                 }
                 for(DocumentChange documentChange : quereySnapshot.getDocumentChanges()){
                     QueryDocumentSnapshot documentSnapshot = documentChange.getDocument();
                     Picture picture = documentSnapshot.toObject(Picture.class);
-                    picture.setPictureID(documentSnapshot.getId());
+                    Integer newid = Integer.valueOf(documentSnapshot.getId());
+                    picture.setPictureID(newid);
                     int pos = pictureList.indexOf(picture.getPictureID());
 
                     switch (documentChange.getType()){
@@ -127,7 +128,7 @@ public class Viewer extends AppCompatActivity {
 
         );
     }
-
+*/
     private void setUpRecyclerView(){
          pictureRecuycleView = findViewById(R.id.recycleViewPage);
         pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );

@@ -77,7 +77,7 @@
         app:layout_constraintGuide_begin="370dp" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/openGallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -92,9 +92,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Browse bilder"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/imageButton4" />
+        app:layout_constraintBottom_toBottomOf="@+id/openGallery"
+        app:layout_constraintEnd_toStartOf="@+id/openGallery"
+        app:layout_constraintTop_toTopOf="@+id/openGallery" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
