@@ -26,8 +26,8 @@ public class Picture {
 
         ArrayList<Picture> dataList = new ArrayList<>();
 
-        for(int i = 7; i < databaseLength; i++){
-            Picture picture = new Picture(i,"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJwG-Z01rJUziDMRH1jPTVcn9dKdeizUmoTRTA%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1",HOLDER);
+        for(int i = 0; i < databaseLength; i++){
+            Picture picture = new Picture(i,"HOLDER",HOLDER);
             dataList.add(picture);
         }
 
@@ -39,7 +39,7 @@ public class Picture {
         return pictureID;
     }
 
-    public void setPictureID(int pictureID) {
+    public void setPictureID(String pictureID) {
         this.pictureID = pictureID;
     }
 
@@ -59,6 +59,7 @@ public class Picture {
         this.tags = tags;
     }
 
+    
 
 
 }
