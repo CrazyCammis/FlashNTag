@@ -45,11 +45,9 @@ public class Viewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
 
-        pictureList = new ArrayList<>();
-        pictureIDList = new ArrayList<Integer>();
-
+      // pictureList = new ArrayList<>();
+       // pictureIDList = new ArrayList<Integer>();
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         toolbar.setTitle("RecyclerVier");
 
         //setSupportActionBar(toolbar); GET HELP FROM ASSISTANT

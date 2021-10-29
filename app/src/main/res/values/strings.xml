@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FlashNTag</string>
+    <string name="date_added">Date Added</string>
+    <string name="picture">picture</string>
 </resources>

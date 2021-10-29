@@ -36,8 +36,8 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     @Override
     public PictureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
         Log.d(TAG, "onCreateViewHolder");
-
-        View itemview = inflater.inflate(R.layout.picturelist, parent, false);
+//Reference to the XML File
+        View itemview = inflater.inflate(R.layout.picturelist_xmlfile, parent, false);
 
 
         return new PictureViewHolder(itemview);
@@ -45,6 +45,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
     @Override
     public void onBindViewHolder(@NonNull PictureViewHolder viewHolder, int position) {
+        //hva skal vi vise
         Picture pictureToShow = pictureList.get(position);
 
         Log.d(TAG, "onBindViewHolde" + pictureToShow.getFileName() + " - " + position);
@@ -59,14 +60,17 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     }
 
     public class PictureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        //The  references to picture and text
         private TextView typeTextView;
         private ImageView pictureImageView;
         private  int position;
 
         public PictureViewHolder(@NonNull View itemView) {
+            //viewet vi skal sette i
             super(itemView);
 
-            typeTextView = itemView.findViewById(R.id.pictureImageText);
+            typeTextView = itemView.findViewById(R.id.dateAddedText);
             pictureImageView = itemView.findViewById(R.id.pictureImageView);
 
 
@@ -79,7 +83,9 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
         //Sets the data to show the picture
         public  void setPicture(Picture pictureToShow){
+            //gets the date to display
             typeTextView.setText(pictureToShow.getFileName());
+            //sets the image to get
             pictureImageView.setImageResource(pictureToShow.getPictureID());
 
             this.position = position;
