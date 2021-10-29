@@ -98,13 +98,13 @@ public class Viewer extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable QuerySnapshot quereySnapshot, @Nullable FirebaseFirestoreException e) {
                 if(e != null){
-                    Log.w(TAG, "Listened failed.", e)
+                    Log.w(TAG, "Listened failed.", e);
                     return;
                 }
                 for(DocumentChange documentChange : quereySnapshot.getDocumentChanges()){
                     QueryDocumentSnapshot documentSnapshot = documentChange.getDocument();
                     Picture picture = documentSnapshot.toObject(Picture.class);
-                    picture.setPictureID(documentSnapshot.getId());
+                    //picture.setPictureID(documentSnapshot.getId()); //FIX
                     int pos = pictureList.indexOf(picture.getPictureID());
 
                     switch (documentChange.getType()){
