@@ -32,21 +32,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="70dp" />
+        app:layout_constraintGuide_begin="82dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mainGuideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="170dp" />
+        app:layout_constraintGuide_begin="145dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mainGuideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="270dp" />
+        app:layout_constraintGuide_begin="245dp" />
 
     <ImageButton
         android:id="@+id/btnAddImage"
@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="370dp" />
+        app:layout_constraintGuide_begin="345dp" />
 
     <ImageButton
         android:id="@+id/openGallery"
@@ -100,13 +100,14 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="286dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="Search tags or dates"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/mainGuideline1"
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.826" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -117,5 +118,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <ImageButton
+        android:id="@+id/favoritesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainGuidline4"
+        app:layout_constraintVertical_bias="0.724"
+        app:srcCompat="@drawable/inside_out" />
+
+    <TextView
+        android:id="@+id/favoritesButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Favorites"
+        app:layout_constraintEnd_toEndOf="@+id/favoritesButton"
+        app:layout_constraintStart_toStartOf="@+id/favoritesButton"
+        app:layout_constraintTop_toBottomOf="@+id/favoritesButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

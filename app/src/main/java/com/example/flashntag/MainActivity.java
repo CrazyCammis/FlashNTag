@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     ImageButton openGallery;
+    ImageButton openCamera;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +25,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        openCamera = findViewById(R.id.btnOpenCamera);
+        openCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //insert open cam intent here
+                /*Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivity(intent);*/
+            }
+        });
+
+
+
+
     }
 
     public void onGalleryBtnClick (View view) {
-        Intent openGallery = new Intent(this, MainActivity2.class);
+        Intent openGallery = new Intent(this, tagList.class);
         startActivity(openGallery);
     }
 

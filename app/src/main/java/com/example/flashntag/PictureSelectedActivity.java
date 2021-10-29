@@ -33,10 +33,10 @@ public class PictureSelectedActivity extends AppCompatActivity {
         ArrayList<Picture> dataList = (ArrayList<Picture>) Picture.getData();
 
         Picture picture = dataList.get(ID);
-
+/*
         Image image = findViewById(R.id.selectedPicuture);
         text  =findViewById(R.id.date);
-
+*/
 
 
 
