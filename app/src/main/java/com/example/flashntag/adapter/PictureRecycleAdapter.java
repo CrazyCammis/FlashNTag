@@ -20,9 +20,12 @@ import java.util.List;
 
 public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleAdapter.PictureViewHolder>{
     private  static final String TAG = PictureRecycleAdapter.class.getSimpleName();
-    public List<Picture> pictureList;
+    public  List<Picture> pictureList;
     public LayoutInflater inflater;
 
+
+    //ID to be gotten from delete on picture selected acitivyt
+    private int ID;
 
 
     //Picturelist er generert fra getData() i Picture klassen
@@ -31,6 +34,8 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
        this.pictureList = pictureList;
 
     }
+
+
 
     @NonNull
     @Override
@@ -88,6 +93,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             //sets the image to get
             pictureImageView.setImageResource(pictureToShow.getPictureID());
 
+            //gets the position in the list
             this.position = position;
         }
 
@@ -100,6 +106,19 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             intent.putExtra("PIC_ID", position);
             view.getContext().startActivity(intent);
         }
+    }
+
+//put here cause it handeled by the adapter
+    public  void removePicture(int id){
+        pictureList.remove(id);
+        notifyItemRemoved(id);
+        notifyItemRangeChanged(id, pictureList.size());
+    }
+
+//FOR WHEN WE ADD PICTURES USE THIS
+    public void addPicture(int newID, Picture newPicture){
+        pictureList.add(newID, newPicture);
+        notifyItemRangeChanged(newID, pictureList.size());
     }
 
 
