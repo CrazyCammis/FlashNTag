@@ -145,8 +145,8 @@ public class Viewer extends AppCompatActivity {
         for(int i = 0; i <pictureList.size(); i ++){
             Picture picture = pictureList.get(i);
 
-            if(picture.getDate() = dateSent){
-                holder.add(picture)
+            if(picture.getDate().toString() == dateSent){
+                holder.add(picture);
             }
         }
         pictureList = holder;
