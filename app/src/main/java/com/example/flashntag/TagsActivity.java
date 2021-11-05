@@ -31,16 +31,17 @@ public class TagsActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), Viewer.class);
 
                 String text;
+                text = editText.getText().toString();
 
 
 
+                boolean falseHolder = false;
 
 
-
-                //Makes sure to see if we can find the targeted tag in the list, if not we wont be able start the intent 
+                //Makes sure to see if we can find the targeted tag in the list, if not we wont be able start the intent
                     //HOLDER
-                if(true == true/*FINDS THE TAG IN THE LIST"*/) {
-                  text = editText.getText().toString();
+                if(falseHolder == true)/*FINDS THE TAG IN THE LIST"*/ {
+
 
                     intent.putExtra(KEY_TEXT, text);
                     intent.putExtra(TYPE, "tag");
