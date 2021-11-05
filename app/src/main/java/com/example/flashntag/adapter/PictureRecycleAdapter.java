@@ -124,5 +124,15 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
 
 
+    public void typeOfView(String type){
+        switch (type) {
+            case "tag":
+
+        }
+    }
+
+
+
+
 
 }

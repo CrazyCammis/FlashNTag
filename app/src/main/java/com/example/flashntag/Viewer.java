@@ -1,36 +1,29 @@
 package com.example.flashntag;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toolbar;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
 import com.example.flashntag.modeller.Picture;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 //Temporary holder for recucleviwer
 public class Viewer extends AppCompatActivity {
     private List<Picture> pictureList;
     private List<Integer> pictureIDList;
+
+    private List<Picture> holder;
 
     private  FirebaseFirestore firestoreDb;
     private CollectionReference pictureReference;
@@ -39,6 +32,8 @@ public class Viewer extends AppCompatActivity {
 
     private PictureRecycleAdapter pictureRecycleAdapter;
     private  RecyclerView pictureRecuycleView;
+    private String targetSent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +122,60 @@ public class Viewer extends AppCompatActivity {
         );
     }
 */
+
+
+    //For when we getting a dynamic one
+    private void createSpesificList(String type){
+        for(int i = 0; i <pictureList.size(); i ++){
+            Picture picture = pictureList.get(i);
+            String[] tags = picture.getTags();
+
+            for(int i2 = 0; i <tags.length; i2++) {
+                if (tags[i2] == type){
+                    holder.add(picture);
+                }
+            }
+        }
+        pictureList = holder;
+    }
+
+
+    //method for creating a list based on date
+    private void createDatelist(String dateSent ) {
+        for(int i = 0; i <pictureList.size(); i ++){
+            Picture picture = pictureList.get(i);
+
+            if(picture.getDate() = dateSent){
+                holder.add(picture)
+            }
+        }
+        pictureList = holder;
+    }
+
+    private  void setTypeDisplay(String type){
+        switch(type){
+            case "tag":
+                createSpesificList(targetSent);
+                break;
+
+
+                //favorited should be a reserved tag
+            case "favorite" :
+                createSpesificList("favorited");
+                break;
+
+            case "date" :
+                createDatelist(targetSent);
+                break;
+
+
+
+            default:break;
+        }
+    }
+
+
+
     private void setUpRecyclerView(){
          pictureRecuycleView = findViewById(R.id.recycleViewPage);
         pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
