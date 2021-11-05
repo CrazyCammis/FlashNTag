@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlashNTag">
         <activity
-            android:name=".tester"
+            android:name=".TagsActivity"
             android:exported="true" />
         <activity
             android:name=".PictureSelectedActivity"

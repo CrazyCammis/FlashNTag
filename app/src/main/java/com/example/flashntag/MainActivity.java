@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity {
     ImageButton openGallery;
     ImageButton openCamera;
+    ImageButton openTagActivity;
 
 
     @Override
@@ -36,13 +37,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        openTagActivity = findViewById(R.id.openTag);
+        openTagActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), TagsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
 
     }
 
     public void onGalleryBtnClick (View view) {
-        Intent openGallery = new Intent(this, tagList.class);
+        Intent openGallery = new Intent(this, TagsActivity.class);
         startActivity(openGallery);
     }
 
