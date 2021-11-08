@@ -34,19 +34,12 @@ public class TagsActivity extends AppCompatActivity {
 
                 String text;
                 text = editText.getText().toString();
-
-
-
                 tagList = new String[]{"a", "b"};
-
-
-
 
 
                 //Makes sure to see if we can find the targeted tag in the list, if not we wont be able start the intent
                     //HOLDER
                 if(checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
-
 
                     intent.putExtra(KEY_TEXT, text);
                     intent.putExtra(TYPE, "tag");

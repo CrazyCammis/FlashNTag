@@ -16,7 +16,7 @@
             android:id="@+id/pictureImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="84dp"
             android:layout_marginTop="20dp"
             android:contentDescription="@string/picture"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/date_added"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/pictureImageView"
             app:layout_constraintEnd_toEndOf="@+id/pictureImageView"
             app:layout_constraintStart_toStartOf="@+id/pictureImageView" />

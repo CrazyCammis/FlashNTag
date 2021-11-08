@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         openTagActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TagsActivity.class);
+                Intent intent = new Intent(view.getContext(),TagsActivity.class );
                 startActivity(intent);
             }
         });

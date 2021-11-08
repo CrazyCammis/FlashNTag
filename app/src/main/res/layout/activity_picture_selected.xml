@@ -17,6 +17,7 @@
         app:srcCompat="@drawable/captain_america_civil_war" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="292dp"
         android:layout_height="162dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +28,7 @@
         app:layout_constraintVertical_bias="0.17" />
 
     <Button
-        android:id="@+id/addTag"
+        android:id="@+id/addTagButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add tag"
@@ -52,5 +53,43 @@
         app:layout_constraintEnd_toEndOf="@+id/selectedPicuture"
         app:layout_constraintStart_toStartOf="@+id/selectedPicuture"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/submitTagButton"
+        android:layout_width="92dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="40dp"
+        android:text="Submit"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintStart_toEndOf="@+id/addTagText"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/addTagText"
+        android:layout_width="121dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <Button
+        android:id="@+id/cancellAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="Cancel"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addTagText"
+        app:layout_constraintHorizontal_bias="0.807"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

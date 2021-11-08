@@ -41,8 +41,6 @@ public class Picture {
         String[] tagged =  new String[]{"Ani", "Sam", "Joe"};
         ArrayList<Picture> dataList = new ArrayList<>();
 
-
-
         int[] images = getImages();
 
         for(int i = 0; i < images.length; i ++){
@@ -50,8 +48,6 @@ public class Picture {
             Picture picture = new Picture(images[i], d1,  tagged);
             dataList.add(picture);
         }
-
-
 
         return  dataList;
     }
