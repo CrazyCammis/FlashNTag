@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
 import com.example.flashntag.modeller.Picture;
+import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
 
@@ -48,8 +49,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
         //TODO: CREATE VIEW FROM DATA BASE WITH SELECTED PICTURE ID
         //TODO: DELETE FROM GALLERY SEE RECYCLBE VIEW LECTURE 55.00;
-        //TODO: ADD TAGS
-        //TODO: REMOVE TAGS
+                //TODO: REMOVE TAGS
 
 
        // ArrayList<Picture> dataList = (ArrayList<Picture>) Picture.getData();
@@ -59,11 +59,6 @@ public class PictureSelectedActivity extends AppCompatActivity {
         Image image = findViewById(R.id.selectedPicuture);
         text  =findViewById(R.id.date);
 */
-
-
-
-
-
 
 
         addTag = findViewById(R.id.addTagButton);
@@ -99,20 +94,23 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 if(text == null ){
                     Toast.makeText(view.getContext(), "Error, no tag inputed try again", Toast.LENGTH_SHORT).show();
                 }
+
+                else if(checkIfTagExist(holder, text)){
+                    Toast.makeText(view.getContext(), "Error, tag alreadt in list", Toast.LENGTH_SHORT).show();
+                }
+
                 else if(holder.length > 20){
                     Toast.makeText(view.getContext(), "Tag list full", Toast.LENGTH_SHORT).show();
                 }
 
+                //ads to it
                 else{
                     //adds to the empty spot
                     holder[holder.length] = text;
                     //set the new array as the new one
                     picture.setTags(holder);
-
                     Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
@@ -122,29 +120,34 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(),
                         "Tag Deleted",
                         Toast.LENGTH_SHORT).show();
-                //pictureRecycleAdapter.removePicture(ID);
+                pictureRecycleAdapter.removePicture(ID);
             }
         });
 
 }
 
+    private boolean checkIfTagExist(String[] holder, String tag) {
+        if(holder != null && holder.length > 0) {return false;}
+
+        for(int i = 0; i <holder.length; i++){
+            if(holder[i] == tag){return true;}
+        }
+        return  false;
+    }
+
     private void showInput() {
         editText.setVisibility(View.VISIBLE);
         submitButton.setVisibility(View.VISIBLE);
         cancelTag.setVisibility(View.VISIBLE);
-
         DELETE_PICTURE.setVisibility(View.INVISIBLE);
         addTag.setVisibility(View.INVISIBLE);
-
     }
 
     private void hideInput(){
         editText.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
-
         DELETE_PICTURE.setVisibility(View.VISIBLE);
         addTag.setVisibility(View.VISIBLE);
         cancelTag.setVisibility(View.INVISIBLE);
-
     }
 }
