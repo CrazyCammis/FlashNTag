@@ -16,6 +16,8 @@ public class TagsActivity extends AppCompatActivity {
     private Button searchButton;
     private EditText editText;
 
+    private   String[] tagList ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +37,15 @@ public class TagsActivity extends AppCompatActivity {
 
 
 
-                boolean falseHolder = false;
+                tagList = new String[]{"a", "b"};
+
+
+
 
 
                 //Makes sure to see if we can find the targeted tag in the list, if not we wont be able start the intent
                     //HOLDER
-                if(falseHolder == true)/*FINDS THE TAG IN THE LIST"*/ {
+                if(checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
 
 
                     intent.putExtra(KEY_TEXT, text);
@@ -48,6 +53,7 @@ public class TagsActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 }
+
                 else{
 
                     Toast.makeText(view.getContext(),
@@ -59,5 +65,18 @@ public class TagsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public  boolean checkForTags(String text) {
+
+
+        for (int i = 0; i < tagList.length; i++) {
+            if (tagList[i] == text) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
