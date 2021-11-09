@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    ImageButton openGallery;
-    ImageButton openCamera;
-    ImageButton openTagActivity;
+    ImageButton openGallery, openCamera, openTagActivity, addImageButton;
+
+
+
 
 
     @Override
@@ -42,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),TagsActivity.class );
+                startActivity(intent);
+            }
+        });
+
+
+        addImageButton = findViewById(R.id.btnAddImage);
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent    = new Intent (view.getContext(), AddImageActivity.class):
                 startActivity(intent);
             }
         });
