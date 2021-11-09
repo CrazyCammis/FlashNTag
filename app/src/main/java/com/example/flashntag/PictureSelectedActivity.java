@@ -130,7 +130,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
         if(holder != null && holder.length > 0) {return false;}
 
         for(int i = 0; i <holder.length; i++){
-            if(holder[i] == tag){return true;}
+            if(holder[i].equals( tag)){return true;}
         }
         return  false;
     }

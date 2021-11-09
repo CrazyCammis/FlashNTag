@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.flashntag.modeller.Picture;
+
 import java.util.ArrayList;
 
 public class AddImageActivity extends AppCompatActivity {
@@ -15,6 +17,7 @@ public class AddImageActivity extends AppCompatActivity {
     EditText editText;
 
     String[] tagList = new String[20];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +43,32 @@ public class AddImageActivity extends AppCompatActivity {
 
 
         addTagBtn.setOnClickListener(new View.OnClickListener() {
-
-
-
             @Override
             public void onClick(View view) {
                 String text;
                 text = editText.getText().toString();
 
-                if(canBeAddedToTag(text)){
+               if(canBeAddedToTag(text)){
                     tagList[tagList.length] = text;
                 }
+            }
+        });
+
+        
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+                
+                //Picture picture = new Picture()
+                Toast.makeText(view.getContext(), "Picture added", Toast.LENGTH_SHORT).show();
             }
         });
 
 
 
     }
+
 
     private boolean canBeAddedToTag(String text) {
         if(tagList.length < 20 ) {
@@ -66,7 +78,7 @@ public class AddImageActivity extends AppCompatActivity {
             }
 
             for (int i = 0; i < tagList.length; i++) {
-                if (tagList[i] == text){
+                if (tagList[i].equals(text)){
                     return  false ;
                 }
             }

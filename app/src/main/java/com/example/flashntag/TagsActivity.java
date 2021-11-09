@@ -65,7 +65,7 @@ public class TagsActivity extends AppCompatActivity {
 
 
         for (int i = 0; i < tagList.length; i++) {
-            if (tagList[i] == text) {
+            if (tagList[i].equals( text) ){
                 return true;
             }
         }

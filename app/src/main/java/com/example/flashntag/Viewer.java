@@ -131,7 +131,7 @@ public class Viewer extends AppCompatActivity {
             String[] tags = picture.getTags();
 
             for(int i2 = 0; i <tags.length; i2++) {
-                if (tags[i2] == type){
+                if (tags[i2].equals( type)){
                     holder.add(picture);
                 }
             }
