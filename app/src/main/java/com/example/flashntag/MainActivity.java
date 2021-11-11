@@ -1,19 +1,34 @@
 package com.example.flashntag;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
-    ImageButton openGallery, openCamera, openTagActivity, addImageButton;
+    //ImageButton openGallery, openCamera, openTagActivity, addImageButton;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        NavController controller = Navigation.findNavController(this, R.id.NavHostFragment);
+
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        NavigationUI.setupWithNavController(bottomNavigation, controller);
+    }
 
 
-
-
-
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //insert open cam intent here
                 /*Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
 
@@ -72,4 +87,5 @@ public class MainActivity extends AppCompatActivity {
     public void onCameraBtnClick (View view) {
 
     }
+    */
 }

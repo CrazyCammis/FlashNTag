@@ -3,4 +3,6 @@
     <string name="date_added">Date Added</string>
     <string name="picture">picture</string>
     <string name="search_for_tags">Search for Tags</string>
+    <string name="main">Main</string>
+    <string name="add_image">Add Image</string>
 </resources>
