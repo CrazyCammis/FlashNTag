@@ -28,10 +28,12 @@ public class MainFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /*
         openGallery = getView().findViewById(R.id.openGallery);
         openGallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +49,7 @@ public class MainFragment extends Fragment {
             public void onClick(View view) {
                 //insert open cam intent here
                 /*Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
 
@@ -68,6 +70,6 @@ public class MainFragment extends Fragment {
                 Intent intent    = new Intent (view.getContext(), AddImageActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
     }
 }
