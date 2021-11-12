@@ -39,11 +39,11 @@ public class Viewer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
-
+/*
       // pictureList = new ArrayList<>();
        // pictureIDList = new ArrayList<Integer>();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("RecyclerVier");
+      //  Toolbar toolbar = findViewById(R.id.toolbar);
+  //      toolbar.setTitle("RecyclerVier");
 
         //setSupportActionBar(toolbar); GET HELP FROM ASSISTANT
 
@@ -54,7 +54,7 @@ public class Viewer extends AppCompatActivity {
 
         //get the date or create the data
 
-
+*/
 
 
         setUpRecyclerView();
