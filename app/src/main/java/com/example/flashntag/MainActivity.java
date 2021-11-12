@@ -2,8 +2,11 @@ package com.example.flashntag;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
@@ -21,12 +24,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
+        need to convert this to java code and try
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+         */
+
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.navhostfragment);
+        NavController navController = navHostFragment.getNavController();
 
 
-        NavController controller = Navigation.findNavController(this, R.id.navhostfragment);
+        //NavController controller = Navigation.findNavController(this, R.id.navhostfragment);
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
-        NavigationUI.setupWithNavController(bottomNavigation, controller);
+        NavigationUI.setupWithNavController(bottomNavigation, navController);
     }
 
 
