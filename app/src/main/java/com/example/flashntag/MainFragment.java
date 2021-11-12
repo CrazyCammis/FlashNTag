@@ -17,9 +17,7 @@ public class MainFragment extends Fragment {
 
     ImageButton openGallery, openCamera, openTagActivity, addImageButton;
 
-    MainFragment() {
 
-    }
 
     @Nullable
     @Override

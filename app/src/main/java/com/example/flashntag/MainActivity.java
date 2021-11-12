@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NavController controller = Navigation.findNavController(this, R.id.NavHostFragment);
+
+
+        NavController controller = Navigation.findNavController(this, R.id.navhostfragment);
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNavigation, controller);
