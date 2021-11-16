@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1091422067974",
+    "project_id": "flashntag",
+    "storage_bucket": "flashntag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091422067974:android:48d316670000777d7e5287",
+        "android_client_info": {
+          "package_name": "com.example.flashntag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091422067974-k1paa1kkjlaatkbej6vojv9906h8hbo1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiBerk5RDlrjz9kee5cAoPKriTuF6T2Q4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091422067974-k1paa1kkjlaatkbej6vojv9906h8hbo1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
