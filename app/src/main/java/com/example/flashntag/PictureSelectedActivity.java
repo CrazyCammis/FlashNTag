@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
     private ImageButton DELETE_PICTURE;
-    private int ID;
+    private int ID = 1;
 
     private Picture picture;
 
@@ -43,7 +43,8 @@ public class PictureSelectedActivity extends AppCompatActivity {
         //sets the ID for the entire file
          ID = (int) position;
 
-        ArrayList<Picture> dataList = (ArrayList<Picture>) Picture.getData();
+        ArrayList<Picture> dataList;
+        dataList = (ArrayList<Picture>) Picture.getData("", "");
         picture = dataList.get(ID);
         pictureView.setImageResource(picture.getPictureID());
 

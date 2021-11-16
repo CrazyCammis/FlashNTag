@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toolbar;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 //Temporary holder for recucleviwer
 public class Viewer extends AppCompatActivity {
+    private static final String TYPE_OF_VIEW = "all";
     private List<Picture> pictureList;
     private List<Integer> pictureIDList;
 
@@ -32,33 +34,29 @@ public class Viewer extends AppCompatActivity {
 
     private PictureRecycleAdapter pictureRecycleAdapter;
     private  RecyclerView pictureRecuycleView;
-    private String targetSent;
+    private String targetSent = "";
+    private String typeOfView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
+
+        Intent intent =getIntent();
+        //
+       // typeOfView = intent.getStringExtra(TYPE_OF_VIEW);
+        typeOfView = "";
+
 /*
-      // pictureList = new ArrayList<>();
-       // pictureIDList = new ArrayList<Integer>();
-      //  Toolbar toolbar = findViewById(R.id.toolbar);
-  //      toolbar.setTitle("RecyclerVier");
-
-        //setSupportActionBar(toolbar); GET HELP FROM ASSISTANT
-
 
         firestoreDb = FirebaseFirestore.getInstance();
-
         pictureReference = firestoreDb.collection("pictures");
-
         //get the date or create the data
 
 */
 
-
         setUpRecyclerView();
-
     }
 
     @Override
@@ -124,63 +122,16 @@ public class Viewer extends AppCompatActivity {
 */
 
 
-    //For when we getting a dynamic one
-    private void createSpesificList(String type){
-        for(int i = 0; i <pictureList.size(); i ++){
-            Picture picture = pictureList.get(i);
-            String[] tags = picture.getTags();
-
-            for(int i2 = 0; i <tags.length; i2++) {
-                if (tags[i2].equals( type)){
-                    holder.add(picture);
-                }
-            }
-        }
-        pictureList = holder;
-    }
-
-
-    //method for creating a list based on date
-    private void createDatelist(String dateSent ) {
-        for(int i = 0; i <pictureList.size(); i ++){
-            Picture picture = pictureList.get(i);
-
-            if(picture.getDate().toString() == dateSent){
-                holder.add(picture);
-            }
-        }
-        pictureList = holder;
-    }
-
-    private  void setTypeDisplay(String type){
-        switch(type){
-            case "tag":
-                createSpesificList(targetSent);
-                break;
-
-
-                //favorited should be a reserved tag
-            case "favorite" :
-                createSpesificList("favorited");
-                break;
-
-            case "date" :
-                createDatelist(targetSent);
-                break;
-
-
-
-            default:break;
-        }
-    }
-
-
+;
 
     private void setUpRecyclerView(){
          pictureRecuycleView = findViewById(R.id.recycleViewPage);
         pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
 
-        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData()));
+
+        //gets the lists
+
+        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
 
         pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
 
