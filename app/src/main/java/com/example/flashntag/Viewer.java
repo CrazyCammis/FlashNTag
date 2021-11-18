@@ -38,23 +38,39 @@ public class Viewer extends AppCompatActivity {
     private String typeOfView;
 
 
+    private String mainActivityExtra;
+    private String favoritedActivityExtra;
+
+    private String tagsActivityExtra;
+    private String tagsToSearchFor;
+
+    private String dateSearchExtra;
+    private String dateToSearch;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
 
         Intent intent =getIntent();
-        //
-       // typeOfView = intent.getStringExtra(TYPE_OF_VIEW);
-        typeOfView = "";
 
-/*
 
+
+        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+
+        tagsActivityExtra = intent.getStringExtra(TagsActivity.SEND_CODE);
+        tagsToSearchFor = intent.getStringExtra(TagsActivity.TAG_TO_SERACH);
+
+        favoritedActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+
+        /*
         firestoreDb = FirebaseFirestore.getInstance();
         pictureReference = firestoreDb.collection("pictures");
-        //get the date or create the data
+        //get the date or create the data*/
 
-*/
+
 
         setUpRecyclerView();
     }
@@ -64,12 +80,58 @@ public class Viewer extends AppCompatActivity {
         super.onResume();
         //createFirestoreReadListener();
 
-        if(fireStorelistenerRegistration != null){
-            fireStorelistenerRegistration.remove();
-        }
+       // if(fireStorelistenerRegistration != null){
+       //     fireStorelistenerRegistration.remove();
+       // }
     }
+
+
+
+
+    private void setDefault() {
+    if (mainActivityExtra.equals("mainTrue")) {
+        typeOfView = "all";
+        targetSent = "";
+    }
+
+
+    else if (favoritedActivityExtra.equals("favoriteTrue")) {
+            typeOfView = "favorite";
+            targetSent = "";
+    }
+
+    else if (tagsActivityExtra.equals("tagTrue")) {
+        typeOfView = "tag";
+        targetSent = tagsToSearchFor;
+    }
+
+    else if (dateSearchExtra.equals("dateTrue")) {
+        typeOfView = "date";
+        targetSent = dateToSearch;
+    }
+
+
+}
+
+
+
+    private void setUpRecyclerView(){
+         pictureRecuycleView = findViewById(R.id.recycleViewPage);
+        pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
+
+
+        //gets the lists
+
+        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
+
+        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
+
+    }
+}
+
+
 /*
-    private void createFirestoreReadListener() {/*
+    private void createFirestoreReadListener() {
         pictureReference.get().addOnCompleteListener(@NonNull Task<QuerySnapshot> task){
             if (task.isSucssesful()){
                 for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
@@ -83,8 +145,8 @@ public class Viewer extends AppCompatActivity {
             else{
                 Log.d(TAG, "Error getting documents " + task.getException);
             }
-        });*/
-/*
+        });
+
        fireStorelistenerRegistration =  pictureReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot quereySnapshot, @Nullable FirebaseFirestoreException e) {
@@ -120,20 +182,3 @@ public class Viewer extends AppCompatActivity {
         );
     }
 */
-
-
-;
-
-    private void setUpRecyclerView(){
-         pictureRecuycleView = findViewById(R.id.recycleViewPage);
-        pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
-
-
-        //gets the lists
-
-        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
-
-        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
-
-    }
-}

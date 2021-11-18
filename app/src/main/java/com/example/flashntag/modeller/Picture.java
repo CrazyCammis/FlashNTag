@@ -16,6 +16,11 @@ public class Picture {
     private int pictureID;
 
 
+    private static ArrayList<String> allTags ;
+
+
+
+
     public Date getDate() {
         return date;
     }
@@ -36,17 +41,6 @@ public class Picture {
         this.pictureID = pictureID;
     }
 //TODO, finne ut hvordan vi skal lagre data og så lage get data fra dette
-
-
-
-
-
-    public void typeOfView(String type){
-        switch (type) {
-            case "tag":
-
-        }
-    }
 
 
 
@@ -73,8 +67,6 @@ public class Picture {
 
         switch(type){
             case "tag":
-
-
                 //check for tags and add it to a holding list
                 for (Picture pictures : dataList) {
                     String[] tags = pictures.getTags();
@@ -167,6 +159,48 @@ public class Picture {
     }
 
 
+    private void addTag(Picture pika, String tag    ){
+
+        String[] tags = pika.getTags();
+        List valid = Arrays.asList(tags);
+
+        if(valid.contains(tag)){
+            return;
+        }
+
+        else{
+            for(int i = 0; i < tags.length; i++){
+                if(tags[i] == ""){
+                    tags[i] = tag;
+
+                    pika.setTags(tags);
+                    return;
+
+                }
+            }
+        }
+
+    }
+
+
+
+
+
+private static void addNewTagToTagList(String tag) {
+
+    if (!allTags.contains(tag)){
+        allTags.add((tag));
+        return;
+    }
+
+}
+
+public static ArrayList<String> getAllTags(){
+    addNewTagToTagList("addNewTagToTagList");
+    addNewTagToTagList("addNewTagToTsswagList");
+    addNewTagToTagList("s");
+    return  allTags;
+}
 
 
 }
