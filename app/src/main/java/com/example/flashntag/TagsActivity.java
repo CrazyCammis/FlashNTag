@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.flashntag.modeller.Picture;
+
+import java.util.ArrayList;
+
 public class TagsActivity extends AppCompatActivity {
-    public static final  String KEY_TEXT =  "EDIT_TEXT";
-    public static final  String TYPE =  "tag";
+    public static final String SEND_CODE = "tagTrue";
+
+    public  static final String TAG_TO_SERACH =  "tag";
 
     private Button searchButton;
     private EditText editText;
@@ -41,9 +46,10 @@ public class TagsActivity extends AppCompatActivity {
                     //HOLDER
                 if(checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
 
-                    intent.putExtra(KEY_TEXT, text);
-                    intent.putExtra(TYPE, "tag");
-
+/*
+                    intent.putExtra(SEND_CODE, "tagTrue");
+                    intent.putExtra(TAG_TO_SERACH, text);
+*/
                     startActivity(intent);
                 }
 
@@ -52,7 +58,6 @@ public class TagsActivity extends AppCompatActivity {
                     Toast.makeText(view.getContext(),
                             "Tag " + text + " not found, try again",
                             Toast.LENGTH_SHORT).show();
-
                 }
 
             }
@@ -61,15 +66,12 @@ public class TagsActivity extends AppCompatActivity {
     }
 
 
+    //PROBLEM HERE IN CHECK FOR TAGS
+
     public  boolean checkForTags(String text) {
 
-
-        for (int i = 0; i < tagList.length; i++) {
-            if (tagList[i].equals( text) ){
-                return true;
-            }
-        }
-
-        return false;
+        ArrayList<String> allTags = Picture.getAllTags();
+        if(allTags.contains(text)){return true;}
+        else return false;
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toolbar;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 //Temporary holder for recucleviwer
 public class Viewer extends AppCompatActivity {
+    private static final String TYPE_OF_VIEW = "all";
     private List<Picture> pictureList;
     private List<Integer> pictureIDList;
 
@@ -32,7 +34,18 @@ public class Viewer extends AppCompatActivity {
 
     private PictureRecycleAdapter pictureRecycleAdapter;
     private  RecyclerView pictureRecuycleView;
-    private String targetSent;
+    private String targetSent = "";
+    private String typeOfView;
+
+
+    private String mainActivityExtra;
+    private String favoritedActivityExtra;
+
+    private String tagsActivityExtra;
+    private String tagsToSearchFor;
+
+    private String dateSearchExtra;
+    private String dateToSearch;
 
 
     @Override
@@ -40,25 +53,26 @@ public class Viewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
 
-      // pictureList = new ArrayList<>();
-       // pictureIDList = new ArrayList<Integer>();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("RecyclerVier");
-
-        //setSupportActionBar(toolbar); GET HELP FROM ASSISTANT
+        Intent intent =getIntent();
 
 
+
+        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+
+        tagsActivityExtra = intent.getStringExtra(TagsActivity.SEND_CODE);
+        tagsToSearchFor = intent.getStringExtra(TagsActivity.TAG_TO_SERACH);
+
+        favoritedActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+
+        /*
         firestoreDb = FirebaseFirestore.getInstance();
-
         pictureReference = firestoreDb.collection("pictures");
-
-        //get the date or create the data
-
+        //get the date or create the data*/
 
 
 
         setUpRecyclerView();
-
     }
 
     @Override
@@ -66,12 +80,58 @@ public class Viewer extends AppCompatActivity {
         super.onResume();
         //createFirestoreReadListener();
 
-        if(fireStorelistenerRegistration != null){
-            fireStorelistenerRegistration.remove();
-        }
+       // if(fireStorelistenerRegistration != null){
+       //     fireStorelistenerRegistration.remove();
+       // }
     }
+
+
+
+
+    private void setDefault() {
+    if (mainActivityExtra.equals("mainTrue")) {
+        typeOfView = "all";
+        targetSent = "";
+    }
+
+
+    else if (favoritedActivityExtra.equals("favoriteTrue")) {
+            typeOfView = "favorite";
+            targetSent = "";
+    }
+
+    else if (tagsActivityExtra.equals("tagTrue")) {
+        typeOfView = "tag";
+        targetSent = tagsToSearchFor;
+    }
+
+    else if (dateSearchExtra.equals("dateTrue")) {
+        typeOfView = "date";
+        targetSent = dateToSearch;
+    }
+
+
+}
+
+
+
+    private void setUpRecyclerView(){
+         pictureRecuycleView = findViewById(R.id.recycleViewPage);
+        pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
+
+
+        //gets the lists
+
+        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
+
+        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
+
+    }
+}
+
+
 /*
-    private void createFirestoreReadListener() {/*
+    private void createFirestoreReadListener() {
         pictureReference.get().addOnCompleteListener(@NonNull Task<QuerySnapshot> task){
             if (task.isSucssesful()){
                 for(QueryDocumentSnapshot documentSnapshot: task.getResult()){
@@ -85,8 +145,8 @@ public class Viewer extends AppCompatActivity {
             else{
                 Log.d(TAG, "Error getting documents " + task.getException);
             }
-        });*/
-/*
+        });
+
        fireStorelistenerRegistration =  pictureReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot quereySnapshot, @Nullable FirebaseFirestoreException e) {
@@ -122,67 +182,3 @@ public class Viewer extends AppCompatActivity {
         );
     }
 */
-
-
-    //For when we getting a dynamic one
-    private void createSpesificList(String type){
-        for(int i = 0; i <pictureList.size(); i ++){
-            Picture picture = pictureList.get(i);
-            String[] tags = picture.getTags();
-
-            for(int i2 = 0; i <tags.length; i2++) {
-                if (tags[i2].equals( type)){
-                    holder.add(picture);
-                }
-            }
-        }
-        pictureList = holder;
-    }
-
-
-    //method for creating a list based on date
-    private void createDatelist(String dateSent ) {
-        for(int i = 0; i <pictureList.size(); i ++){
-            Picture picture = pictureList.get(i);
-
-            if(picture.getDate().toString() == dateSent){
-                holder.add(picture);
-            }
-        }
-        pictureList = holder;
-    }
-
-    private  void setTypeDisplay(String type){
-        switch(type){
-            case "tag":
-                createSpesificList(targetSent);
-                break;
-
-
-                //favorited should be a reserved tag
-            case "favorite" :
-                createSpesificList("favorited");
-                break;
-
-            case "date" :
-                createDatelist(targetSent);
-                break;
-
-
-
-            default:break;
-        }
-    }
-
-
-
-    private void setUpRecyclerView(){
-         pictureRecuycleView = findViewById(R.id.recycleViewPage);
-        pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
-
-        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData()));
-
-        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
-
-    }
-}

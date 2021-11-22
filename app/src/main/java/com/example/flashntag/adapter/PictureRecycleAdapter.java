@@ -89,7 +89,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         //Sets the data to show the picture
         public  void setPicture(Picture pictureToShow){
             //gets the date to display
-            typeTextView.setText(pictureToShow.getFileName());
+            typeTextView.setText(pictureToShow.getDate().toString());
             //sets the image to get
             pictureImageView.setImageResource(pictureToShow.getPictureID());
 
@@ -124,12 +124,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
 
 
-    public void typeOfView(String type){
-        switch (type) {
-            case "tag":
-
-        }
-    }
 
 
 

@@ -20,9 +20,10 @@ import java.util.ArrayList;
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
     private ImageButton DELETE_PICTURE;
-    private int ID;
+    private int ID = 1;
 
     private Picture picture;
+    private String[] tagList = new String[20];
 
     private Button addTag;
     private Button submitButton;
@@ -43,9 +44,12 @@ public class PictureSelectedActivity extends AppCompatActivity {
         //sets the ID for the entire file
          ID = (int) position;
 
-        ArrayList<Picture> dataList = (ArrayList<Picture>) Picture.getData();
+        ArrayList<Picture> dataList;
+        dataList = (ArrayList<Picture>) Picture.getData("", "");
         picture = dataList.get(ID);
         pictureView.setImageResource(picture.getPictureID());
+
+        tagList = picture.getTags();
 
         //TODO: CREATE VIEW FROM DATA BASE WITH SELECTED PICTURE ID
         //TODO: DELETE FROM GALLERY SEE RECYCLBE VIEW LECTURE 55.00;
@@ -89,7 +93,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String text;
                 text = editText.getText().toString();
-                String[] holder = picture.getTags();
+                String[] holder = tagList;
 
                 if(text == null ){
                     Toast.makeText(view.getContext(), "Error, no tag inputed try again", Toast.LENGTH_SHORT).show();
