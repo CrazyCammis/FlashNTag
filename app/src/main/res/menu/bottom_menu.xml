@@ -14,7 +14,10 @@
     <item
         android:id="@+id/tagsFragment"
         android:icon="@drawable/ic_action_home"
-        android:title="@string/add_image" />
+        android:title="@string/tags" />
 
-
+    <item
+        android:id="@+id/viewerFragment"
+        android:icon="@drawable/ic_action_home"
+        android:title="@string/pictures" />
 </menu>

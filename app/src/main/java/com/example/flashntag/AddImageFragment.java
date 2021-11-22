@@ -34,6 +34,7 @@ public class AddImageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        /*
         editText = getView().findViewById(R.id.addTagText);
 
         addImageButton = getView().findViewById(R.id.addImageFromGalleryBtn);
@@ -72,7 +73,7 @@ public class AddImageFragment extends Fragment {
                 //Picture picture = new Picture()
                 Toast.makeText(view.getContext(), "Picture added", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     private boolean canBeAddedToTag(String text) {

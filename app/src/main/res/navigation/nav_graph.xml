@@ -20,4 +20,10 @@
         android:name="com.example.flashntag.TagsFragment"
         android:label="fragment_tags"
         tools:layout="@layout/fragment_tags" />
+    <fragment
+        android:id="@+id/viewerFragment"
+        android:name="com.example.flashntag.Viewer"
+        android:label="fragment_viewer"
+        tools:layout="@layout/fragment_viewer"
+        />
 </navigation>

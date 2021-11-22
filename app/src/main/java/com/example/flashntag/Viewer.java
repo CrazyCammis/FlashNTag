@@ -1,11 +1,17 @@
 package com.example.flashntag;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
@@ -20,20 +26,20 @@ import com.google.firebase.firestore.ListenerRegistration;
 import java.util.List;
 
 //Temporary holder for recucleviwer
-public class Viewer extends AppCompatActivity {
+public class Viewer extends Fragment {
     private static final String TYPE_OF_VIEW = "all";
     private List<Picture> pictureList;
     private List<Integer> pictureIDList;
 
     private List<Picture> holder;
 
-    private  FirebaseFirestore firestoreDb;
+    private FirebaseFirestore firestoreDb;
     private CollectionReference pictureReference;
     private ListenerRegistration fireStorelistenerRegistration;
 
 
     private PictureRecycleAdapter pictureRecycleAdapter;
-    private  RecyclerView pictureRecuycleView;
+    private RecyclerView pictureRecuycleView;
     private String targetSent = "";
     private String typeOfView;
 
@@ -48,12 +54,18 @@ public class Viewer extends AppCompatActivity {
     private String dateToSearch;
 
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewer);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_viewer, container, false);
+    }
 
-        Intent intent =getIntent();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Intent intent = getActivity().getIntent();
 
 
 
@@ -76,7 +88,7 @@ public class Viewer extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         //createFirestoreReadListener();
 
@@ -116,15 +128,16 @@ public class Viewer extends AppCompatActivity {
 
 
     private void setUpRecyclerView(){
-         pictureRecuycleView = findViewById(R.id.recycleViewPage);
-        pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );
+         pictureRecuycleView = getView().findViewById(R.id.recycleViewPage);
+        pictureRecycleAdapter = new PictureRecycleAdapter(getActivity(), pictureList );
+        //Had to convert 'this' into getActivity(). hopefully same function
 
 
         //gets the lists
 
-        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
+        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(getActivity(), Picture.getData(typeOfView, targetSent)));
 
-        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
+        pictureRecuycleView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
 
     }
 }
