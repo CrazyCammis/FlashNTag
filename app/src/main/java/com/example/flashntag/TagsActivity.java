@@ -70,18 +70,8 @@ public class TagsActivity extends AppCompatActivity {
 
     public  boolean checkForTags(String text) {
 
-
-        boolean holder = false;
-                if(holder = true){
-                    return false;
-                }
-/*
         ArrayList<String> allTags = Picture.getAllTags();
-
-        if(allTags.contains(text)){return true;}*/
-
-
-        else
-            return false;
+        if(allTags.contains(text)){return true;}
+        else return false;
     }
 }
