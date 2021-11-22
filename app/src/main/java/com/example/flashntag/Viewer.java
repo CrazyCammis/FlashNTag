@@ -57,13 +57,13 @@ public class Viewer extends AppCompatActivity {
 
 
 
-        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+        mainActivityExtra = intent.getStringExtra(MainFragment.SEND_CODE);
 
         tagsActivityExtra = intent.getStringExtra(TagsActivity.SEND_CODE);
         tagsToSearchFor = intent.getStringExtra(TagsActivity.TAG_TO_SERACH);
 
-        favoritedActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
-        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+        favoritedActivityExtra = intent.getStringExtra(MainFragment.SEND_CODE);
+        mainActivityExtra = intent.getStringExtra(MainFragment.SEND_CODE);
 
         /*
         firestoreDb = FirebaseFirestore.getInstance();

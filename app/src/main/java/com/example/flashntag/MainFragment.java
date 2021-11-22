@@ -17,7 +17,7 @@ public class MainFragment extends Fragment {
 
     ImageButton openGallery, openCamera, openTagActivity, addImageButton;
 
-
+    public static  final String SEND_CODE = "mainTrue";
 
     @Nullable
     @Override
