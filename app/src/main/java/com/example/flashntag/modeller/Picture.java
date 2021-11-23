@@ -49,6 +49,7 @@ public class Picture {
 
     //Generere data basert på databasen, ikke ferdig for ikke enig om database
 
+
     public static List<Picture> getData(String type, String targetTag) {
 
 

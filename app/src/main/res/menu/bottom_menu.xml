@@ -7,14 +7,15 @@
         android:icon="@drawable/ic_action_home"
         android:title="@string/main" />
 
-    <item
-        android:id="@+id/addImageFragment"
-        android:icon="@drawable/ic_action_home"
-        android:title="@string/add_image" />
+
     <item
         android:id="@+id/tagsFragment"
         android:icon="@drawable/ic_action_home"
         android:title="@string/tags" />
+    <item
+        android:id="@+id/addImageFragment"
+        android:icon="@drawable/ic_action_home"
+        android:title="@string/add_image" />
 
     <item
         android:id="@+id/viewerFragment"

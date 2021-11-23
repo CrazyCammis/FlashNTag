@@ -20,9 +20,6 @@ public class AddImageFragment extends Fragment {
 
     String[] tagList = new String[20];
 
-    AddImageFragment() {
-
-    }
 
     @Nullable
     @Override
@@ -75,6 +72,7 @@ public class AddImageFragment extends Fragment {
             }
         });*/
     }
+
 
     private boolean canBeAddedToTag(String text) {
         if(tagList.length < 20 ) {
