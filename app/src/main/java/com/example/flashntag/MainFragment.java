@@ -5,17 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import androidx.navigation.Navigation;
 
 
 public class MainFragment extends Fragment {
 
-    ImageButton openGallery, openCamera, openTagActivity, addImageButton;
+    ImageButton openGallery, openCamera, openTagFragment, addImageButton;
 
     public static  final String SEND_CODE = "mainTrue";
 
@@ -31,43 +32,43 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
+
         openGallery = getView().findViewById(R.id.openGallery);
+        openGallery.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_viewerFragment));
+
+        /*
         openGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Viewer.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         openCamera = getView().findViewById(R.id.btnOpenCamera);
+
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //insert open cam intent here
                 /*Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
-        openTagActivity = getView().findViewById(R.id.openTag);
-        openTagActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),TagsActivity.class );
-                startActivity(intent);
-            }
-        });
+        openTagFragment = getView().findViewById(R.id.openTag);
+        openTagFragment.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_tagsFragment));
+
 
 
         addImageButton = getView().findViewById(R.id.btnAddImage);
+        addImageButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_addImageFragment));
         addImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent    = new Intent (view.getContext(), AddImageActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 }

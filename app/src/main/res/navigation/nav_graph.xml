@@ -9,7 +9,17 @@
         android:id="@+id/mainFragment"
         android:name="com.example.flashntag.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_viewerFragment"
+            app:destination="@id/viewerFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addImageFragment"
+            app:destination="@id/addImageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_tagsFragment"
+            app:destination="@id/tagsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addImageFragment"
         android:name="com.example.flashntag.AddImageFragment"
