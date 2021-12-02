@@ -49,7 +49,7 @@ public class Picture {
     public static List<Picture> getData(String type, String targetTag) {
 
 
-        String[] tagged =  new String[]{"Ani", "Sam", "Joe"};
+        String[] tagged =  new String[]{"#Ani", "#Sam", "#Joe", "#Freedom", "#ThrowBack"};
         ArrayList<Picture> dataList = new ArrayList<>();
 
         int[] images = getImages();

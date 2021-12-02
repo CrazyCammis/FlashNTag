@@ -1,9 +1,11 @@
 package com.example.flashntag;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
+import com.example.flashntag.adapter.TagListRecylerAdapter;
 import com.example.flashntag.modeller.Picture;
-import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
 
@@ -24,12 +26,12 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
 
     private Picture picture;
-    private String[] tagList = new String[20];
+    private String[] tagList = {"pasta", "Pregnant Mario", "Pregnant Luigi", "Plane", "","Pregnant Sonic", "Pregnant Donald Duck"};
 
     private Button addTag;
     private Button submitButton;
     private Button cancelTag;
-    private Button DELETE_PICTURE;
+    private ImageButton DELETE_PICTURE;
     private EditText addTagText;
 
     private TextView date;
@@ -57,11 +59,19 @@ public class PictureSelectedActivity extends AppCompatActivity {
         picture = dataList.get(position);
 
 
+
+        //returns array that only have the tags, removes any ampty one from the count
+        tagList= picture.getTags();
+        //tagList = sortList(tagList);
+
+
+
+
+
         date.setText(picture.getDate().toString());
         pictureView.setImageResource(picture.getPictureID());
 
-        tagList = picture.getTags();
-
+        setUpRecycleView(tagList);
         //TODO: CREATE VIEW FROM DATA BASE WITH SELECTED PICTURE ID
         //TODO: DELETE FROM GALLERY SEE RECYCLBE VIEW LECTURE 55.00;
                 //TODO: REMOVE TAGS
@@ -129,7 +139,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(),
                         "Tag Deleted",
                         Toast.LENGTH_SHORT).show();
-                pictureRecycleAdapter.removePicture(position);
+             //   pictureRecycleAdapter.removePicture(position);
             }
         });
 
@@ -162,4 +172,28 @@ public class PictureSelectedActivity extends AppCompatActivity {
         cancelTag.setVisibility(View.INVISIBLE);
     }
 
+    private void setUpRecycleView(String[] tagList){
+        RecyclerView tagListRecycleView = findViewById(R.id.tagRecyclerView);
+
+        tagListRecycleView.setAdapter(new TagListRecylerAdapter(this, tagList));
+        tagListRecycleView.setLayoutManager(new GridLayoutManager(this, 3));
+    }
+
+
+    public String[] sortList(String[] tagList){
+        int count = 0;
+        for(int i = 0; i < tagList.length; i++){
+            if(!tagList[i].equals("")){
+                count++;
+            }
+        }
+
+        String[] holder = new String[count];
+        for(int i = 0; i < tagList.length; i++){
+            if(!tagList[i].equals("")){
+                holder[i] = tagList[i];
+            }
+        }
+        return  holder;
+    }
 }

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashntag.PictureSelectedActivity;
 import com.example.flashntag.R;
-import com.example.flashntag.TesterActivity;
 import com.example.flashntag.modeller.Picture;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     public LayoutInflater inflater;
     //private  int position;
 
-    //ID to be gotten from delete on picture selected acitivyt
     private int ID;
 
 
@@ -41,7 +39,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     @Override
     public PictureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
         Log.d(TAG, "onCreateViewHolder");
-//Reference to the XML File
+    //Reference to the XML File
         View itemview = inflater.inflate(R.layout.picturelist_xmlfile, parent, false);
 
         return new PictureViewHolder(itemview);
@@ -77,7 +75,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
             typeTextView = itemView.findViewById(R.id.dateAddedText);
             pictureImageView = itemView.findViewById(R.id.pictureImageView);
-
 
             //sets on click
             itemView.setOnClickListener(this);
@@ -121,12 +118,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         pictureList.add(newID, newPicture);
         notifyItemRangeChanged(newID, pictureList.size());
     }
-
-
-
-
-
-
 
 
 
