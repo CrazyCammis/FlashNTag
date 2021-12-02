@@ -10,8 +10,6 @@ import android.widget.ImageButton;
 public class MainActivity extends AppCompatActivity {
     ImageButton openGallery, openCamera, openTagActivity, addImageButton;
 
-    public static  final String SEND_CODE = "mainTrue";
-
 
 
     @Override
@@ -24,8 +22,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Viewer.class);
+
+
+                intent.putExtra("activity","mainTrue");
+                intent.putExtra("target","");
                 startActivity(intent);
-                intent.putExtra(SEND_CODE,"tagTrue");
             }
         });
 

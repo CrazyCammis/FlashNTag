@@ -46,11 +46,12 @@ public class TagsActivity extends AppCompatActivity {
                     //HOLDER
                 if(checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
 
-/*
-                    intent.putExtra(SEND_CODE, "tagTrue");
-                    intent.putExtra(TAG_TO_SERACH, text);
-*/
+
+
+
                     startActivity(intent);
+                    intent.putExtra("activity", "tagTrue");
+                    intent.putExtra("target", text);
                 }
 
                 else{

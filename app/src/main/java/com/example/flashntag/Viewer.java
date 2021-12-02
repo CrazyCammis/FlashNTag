@@ -38,14 +38,9 @@ public class Viewer extends AppCompatActivity {
     private String typeOfView;
 
 
-    private String mainActivityExtra;
-    private String favoritedActivityExtra;
+    private String activitySentFrom;
+    private String targetFromActivity;
 
-    private String tagsActivityExtra;
-    private String tagsToSearchFor;
-
-    private String dateSearchExtra;
-    private String dateToSearch;
 
 
     @Override
@@ -56,14 +51,10 @@ public class Viewer extends AppCompatActivity {
         Intent intent =getIntent();
 
 
+        activitySentFrom = intent.getStringExtra("activity");
+        targetFromActivity = intent.getStringExtra("target");
 
-        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
-
-        tagsActivityExtra = intent.getStringExtra(TagsActivity.SEND_CODE);
-        tagsToSearchFor = intent.getStringExtra(TagsActivity.TAG_TO_SERACH);
-
-        favoritedActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
-        mainActivityExtra = intent.getStringExtra(MainActivity.SEND_CODE);
+/*
 
         /*
         firestoreDb = FirebaseFirestore.getInstance();
@@ -89,25 +80,25 @@ public class Viewer extends AppCompatActivity {
 
 
     private void setDefault() {
-    if (mainActivityExtra.equals("mainTrue")) {
+    if (activitySentFrom.equals("mainTrue")) {
         typeOfView = "all";
         targetSent = "";
     }
 
 
-    else if (favoritedActivityExtra.equals("favoriteTrue")) {
+    else if (activitySentFrom.equals("favoriteTrue")) {
             typeOfView = "favorite";
             targetSent = "";
     }
 
-    else if (tagsActivityExtra.equals("tagTrue")) {
+    else if (activitySentFrom.equals("tagTrue")) {
         typeOfView = "tag";
-        targetSent = tagsToSearchFor;
+        targetSent = targetFromActivity;
     }
 
-    else if (dateSearchExtra.equals("dateTrue")) {
+    else if (activitySentFrom.equals("dateTrue")) {
         typeOfView = "date";
-        targetSent = dateToSearch;
+        targetSent = targetFromActivity;
     }
 
 

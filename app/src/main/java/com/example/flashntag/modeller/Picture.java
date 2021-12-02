@@ -16,7 +16,7 @@ public class Picture {
     private int pictureID;
 
 
-    private static ArrayList<String> allTags ;
+    private static ArrayList<String> allTags = new ArrayList<String>();
 
 
 
@@ -65,7 +65,7 @@ public class Picture {
 
         ArrayList<Picture> holder = new ArrayList<>();
 
-        switch(type){
+/*       switch(type){
             case "tag":
                 //check for tags and add it to a holding list
                 for (Picture pictures : dataList) {
@@ -107,7 +107,7 @@ public class Picture {
 
                 break;
             default:break;
-        }
+        }*/
 
 
         return  dataList;
@@ -159,9 +159,10 @@ public class Picture {
     }
 
 
-    private void addTag(Picture pika, String tag    ){
+    private void addTag(Picture pic, String tag    ){
 
-        String[] tags = pika.getTags();
+        String[] tags = pic.getTags();
+
         List valid = Arrays.asList(tags);
 
         if(valid.contains(tag)){
@@ -173,7 +174,7 @@ public class Picture {
                 if(tags[i] == ""){
                     tags[i] = tag;
 
-                    pika.setTags(tags);
+                    pic.setTags(tags);
                     return;
 
                 }
@@ -187,6 +188,8 @@ public class Picture {
 
 
 private static void addNewTagToTagList(String tag) {
+
+
 
     if (!allTags.contains(tag)){
         allTags.add((tag));
