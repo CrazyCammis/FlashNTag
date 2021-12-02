@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
-    private ImageButton DELETE_PICTURE;
+
 
     private Picture picture;
     private String[] tagList = new String[20];
@@ -29,6 +29,8 @@ public class PictureSelectedActivity extends AppCompatActivity {
     private Button addTag;
     private Button submitButton;
     private Button cancelTag;
+    private Button DELETE_PICTURE;
+    private EditText addTagText;
 
     private TextView date;
 
@@ -65,27 +67,19 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 //TODO: REMOVE TAGS
 
 
-       // ArrayList<Picture> dataList = (ArrayList<Picture>) Picture.getData();
-
-        //Picture picture = dataList.get(ID);
 
 
-        TextView  date =findViewById(R.id.dateOfPicture);
-    }
-}
-
-/*
         addTag = findViewById(R.id.addTagButton);
-        DELETE_PICTURE = findViewById(R.id.btnOpenCamera);
+        DELETE_PICTURE = findViewById(R.id.deletePicture);
         editText = findViewById(R.id.addTagText);
         submitButton = findViewById(R.id.submitTagButton);
         cancelTag = findViewById(R.id.cancellAddButton);
+        addTagText = findViewById(R.id.addTagText);
 
         addTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showInput();
-
             }
         });
 
@@ -100,7 +94,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {/*
                 String text;
                 text = editText.getText().toString();
                 String[] holder = tagList;
@@ -124,7 +118,8 @@ public class PictureSelectedActivity extends AppCompatActivity {
                     //set the new array as the new one
                     picture.setTags(holder);
                     Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
-                }
+                }*/
+                Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -138,7 +133,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
             }
         });
 
-}
+    }
 
     private boolean checkIfTagExist(String[] holder, String tag) {
         if(holder != null && holder.length > 0) {return false;}
@@ -151,14 +146,16 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
     private void showInput() {
         editText.setVisibility(View.VISIBLE);
+        addTagText.setVisibility(View.VISIBLE);
         submitButton.setVisibility(View.VISIBLE);
         cancelTag.setVisibility(View.VISIBLE);
-        DELETE_PICTURE.setVisibility(View.INVISIBLE);
+       DELETE_PICTURE.setVisibility(View.INVISIBLE);
         addTag.setVisibility(View.INVISIBLE);
     }
 
     private void hideInput(){
         editText.setVisibility(View.INVISIBLE);
+        addTagText.setVisibility(View.INVISIBLE);
         submitButton.setVisibility(View.INVISIBLE);
         DELETE_PICTURE.setVisibility(View.VISIBLE);
         addTag.setVisibility(View.VISIBLE);
@@ -166,4 +163,3 @@ public class PictureSelectedActivity extends AppCompatActivity {
     }
 
 }
-*/
