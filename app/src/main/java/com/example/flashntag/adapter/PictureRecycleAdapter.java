@@ -14,27 +14,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashntag.PictureSelectedActivity;
 import com.example.flashntag.R;
+import com.example.flashntag.TesterActivity;
 import com.example.flashntag.modeller.Picture;
 
 import java.util.List;
 
-public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleAdapter.PictureViewHolder>{
-    private  static final String TAG = PictureRecycleAdapter.class.getSimpleName();
-    public  List<Picture> pictureList;
+public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleAdapter.PictureViewHolder> {
+    private static final String TAG = PictureRecycleAdapter.class.getSimpleName();
+    public List<Picture> pictureList;
     public LayoutInflater inflater;
-
+    //private  int position;
 
     //ID to be gotten from delete on picture selected acitivyt
     private int ID;
 
 
     //Picturelist er generert fra getData() i Picture klassen
-    public PictureRecycleAdapter(Context context, List<Picture> pictureList){
-       this.inflater = LayoutInflater.from(context);
-       this.pictureList = pictureList;
+    public PictureRecycleAdapter(Context context, List<Picture> pictureList) {
+        this.inflater = LayoutInflater.from(context);
+        this.pictureList = pictureList;
 
     }
-
 
 
     @NonNull
@@ -43,7 +43,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         Log.d(TAG, "onCreateViewHolder");
 //Reference to the XML File
         View itemview = inflater.inflate(R.layout.picturelist_xmlfile, parent, false);
-
 
         return new PictureViewHolder(itemview);
     }
@@ -55,7 +54,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
 
         Log.d(TAG, "onBindViewHolde" + pictureToShow.getFileName() + " - " + position);
 
-        viewHolder.setPicture(pictureToShow);
+        viewHolder.setPicture(pictureToShow, position);
 
     }
 
@@ -64,12 +63,13 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         return pictureList.size();
     }
 
-    public class PictureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class PictureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //The  references to picture and text
         private TextView typeTextView;
         private ImageView pictureImageView;
-        private  int position;
+        private int position;
+
 
         public PictureViewHolder(@NonNull View itemView) {
             //viewet vi skal sette i
@@ -79,34 +79,35 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             pictureImageView = itemView.findViewById(R.id.pictureImageView);
 
 
-//sets on click
+            //sets on click
             itemView.setOnClickListener(this);
 
         }
 
 
-
         //Sets the data to show the picture
-        public  void setPicture(Picture pictureToShow){
+        public void setPicture(Picture pictureToShow, int position) {
             //gets the date to display
             typeTextView.setText(pictureToShow.getDate().toString());
             //sets the image to get
             pictureImageView.setImageResource(pictureToShow.getPictureID());
 
             //gets the position in the list
-            this.position = position;
+            this.position =  position;
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent   = new Intent(view.getContext(), PictureSelectedActivity.class);
-            view.getContext().startActivity(intent);
+            Intent intent = new Intent(view.getContext(), PictureSelectedActivity.class);
 
             //should get the ID from he currently selected
-            intent.putExtra("PIC_ID", position);
+          intent.putExtra("PIC_ID", position);
             view.getContext().startActivity(intent);
+
         }
     }
+
+
 
 //put here cause it handeled by the adapter
     public  void removePicture(int id){

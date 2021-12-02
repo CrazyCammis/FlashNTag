@@ -3,12 +3,14 @@ package com.example.flashntag;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
@@ -20,7 +22,6 @@ import java.util.ArrayList;
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
     private ImageButton DELETE_PICTURE;
-    private int ID = 1;
 
     private Picture picture;
     private String[] tagList = new String[20];
@@ -29,9 +30,10 @@ public class PictureSelectedActivity extends AppCompatActivity {
     private Button submitButton;
     private Button cancelTag;
 
-
+    private TextView date;
 
     private ImageView pictureView;
+
     PictureRecycleAdapter pictureRecycleAdapter;
 
     @Override
@@ -40,13 +42,20 @@ public class PictureSelectedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture_selected);
         Intent intent = getIntent();
 
-        long position = intent.getLongExtra("PIC_ID", 0);
+
+        int position = intent.getIntExtra("PIC_ID", 1);
         //sets the ID for the entire file
-         ID = (int) position;
+        pictureView = findViewById(R.id.selectedPicuture);
+        date = findViewById(R.id.dateOfPicture);
+
+
 
         ArrayList<Picture> dataList;
         dataList = (ArrayList<Picture>) Picture.getData("", "");
-        picture = dataList.get(ID);
+        picture = dataList.get(position);
+
+
+        date.setText(picture.getDate().toString());
         pictureView.setImageResource(picture.getPictureID());
 
         tagList = picture.getTags();
@@ -59,12 +68,13 @@ public class PictureSelectedActivity extends AppCompatActivity {
        // ArrayList<Picture> dataList = (ArrayList<Picture>) Picture.getData();
 
         //Picture picture = dataList.get(ID);
+
+
+        TextView  date =findViewById(R.id.dateOfPicture);
+    }
+}
+
 /*
-        Image image = findViewById(R.id.selectedPicuture);
-        text  =findViewById(R.id.date);
-*/
-
-
         addTag = findViewById(R.id.addTagButton);
         DELETE_PICTURE = findViewById(R.id.btnOpenCamera);
         editText = findViewById(R.id.addTagText);
@@ -124,7 +134,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(),
                         "Tag Deleted",
                         Toast.LENGTH_SHORT).show();
-                pictureRecycleAdapter.removePicture(ID);
+                pictureRecycleAdapter.removePicture(position);
             }
         });
 
@@ -154,4 +164,6 @@ public class PictureSelectedActivity extends AppCompatActivity {
         addTag.setVisibility(View.VISIBLE);
         cancelTag.setVisibility(View.INVISIBLE);
     }
+
 }
+*/

@@ -21,8 +21,10 @@ public class TesterActivity extends AppCompatActivity {
 
 
 
-        activitySentFrom = intent.getStringExtra("activity");
+        int holder = intent.getIntExtra("activity", 1);
+       activitySentFrom = Integer.toString(holder);
         targetFromActivity = intent.getStringExtra("target");
+
 
 
 

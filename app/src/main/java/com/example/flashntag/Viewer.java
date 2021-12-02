@@ -34,7 +34,7 @@ public class Viewer extends AppCompatActivity {
 
     private PictureRecycleAdapter pictureRecycleAdapter;
     private  RecyclerView pictureRecuycleView;
-    private String targetSent = "";
+    private String targetSent;
     private String typeOfView;
 
 
@@ -62,7 +62,7 @@ public class Viewer extends AppCompatActivity {
         //get the date or create the data*/
 
 
-
+    setDefault();
         setUpRecyclerView();
     }
 
@@ -80,26 +80,26 @@ public class Viewer extends AppCompatActivity {
 
 
     private void setDefault() {
-    if (activitySentFrom.equals("mainTrue")) {
-        typeOfView = "all";
-        targetSent = "";
-    }
+        if (activitySentFrom.equals("mainTrue")) {
+            typeOfView = "all";
+            targetSent = "";
+        }
 
 
-    else if (activitySentFrom.equals("favoriteTrue")) {
+        else if (activitySentFrom.equals("favoriteTrue")) {
             typeOfView = "favorite";
             targetSent = "";
-    }
+        }
 
-    else if (activitySentFrom.equals("tagTrue")) {
-        typeOfView = "tag";
-        targetSent = targetFromActivity;
-    }
+        else if (activitySentFrom.equals("tagTrue")) {
+            typeOfView = "tag";
+            targetSent = targetFromActivity;
+        }
 
-    else if (activitySentFrom.equals("dateTrue")) {
-        typeOfView = "date";
-        targetSent = targetFromActivity;
-    }
+        else if (activitySentFrom.equals("dateTrue")) {
+            typeOfView = "date";
+            targetSent = targetFromActivity;
+        }
 
 
 }
@@ -122,6 +122,8 @@ public class Viewer extends AppCompatActivity {
 
 
 /*
+
+//Down prioritsed
     private void createFirestoreReadListener() {
         pictureReference.get().addOnCompleteListener(@NonNull Task<QuerySnapshot> task){
             if (task.isSucssesful()){

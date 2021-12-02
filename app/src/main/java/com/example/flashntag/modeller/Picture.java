@@ -30,9 +30,6 @@ public class Picture {
     }
 
 
-
-
-
     //ImageID, Type, Descrition
     public Picture(int pictureID, /*String fileName*/ Date date, String[] tags ) {
        // this.fileName = fileName;
@@ -65,7 +62,8 @@ public class Picture {
 
         ArrayList<Picture> holder = new ArrayList<>();
 
-/*       switch(type){
+       switch(type){
+
             case "tag":
                 //check for tags and add it to a holding list
                 for (Picture pictures : dataList) {
@@ -78,8 +76,8 @@ public class Picture {
 
                 }
                 dataList = holder;
-
             break;
+
             //favorited should be a reserved tag
             case "favorite" :
                               //check for tags and add it to a holding list
@@ -104,11 +102,10 @@ public class Picture {
                     }
                 }
                 dataList = holder;
-
                 break;
-            default:break;
-        }*/
 
+            default:break;
+       }
 
         return  dataList;
     }
@@ -180,31 +177,22 @@ public class Picture {
                 }
             }
         }
-
     }
 
 
-
-
-
-private static void addNewTagToTagList(String tag) {
-
-
-
-    if (!allTags.contains(tag)){
-        allTags.add((tag));
-        return;
+    private static void addNewTagToTagList(String tag) {
+       if (!allTags.contains(tag)){
+            allTags.add((tag));
+            return;
+       }
     }
 
-}
-
-public static ArrayList<String> getAllTags(){
-    addNewTagToTagList("addNewTagToTagList");
-    addNewTagToTagList("addNewTagToTsswagList");
-    addNewTagToTagList("s");
-    return  allTags;
-}
-
+    public static ArrayList<String> getAllTags(){
+        addNewTagToTagList("addNewTagToTagList");
+        addNewTagToTagList("addNewTagToTsswagList");
+        addNewTagToTagList("s");
+        return  allTags;
+    }
 
 }
 
