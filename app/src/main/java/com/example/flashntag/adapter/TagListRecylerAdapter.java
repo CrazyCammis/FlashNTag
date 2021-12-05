@@ -1,6 +1,7 @@
 package com.example.flashntag.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashntag.R;
+import com.example.flashntag.Viewer;
 
 public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAdapter.TagListViewHolder>{
     private static final String TAG = TagListRecylerAdapter.class.getSimpleName();
 
     private String[] tagLis = {};
     private LayoutInflater inflater;
+
+    private String tag;
 
 
     public TagListRecylerAdapter(Context context, String[] tagList){
@@ -58,7 +62,7 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
     }
 
 
-    public  class TagListViewHolder extends RecyclerView.ViewHolder {
+    public  class TagListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private Button tagToShow;
         private int position;
 
@@ -67,6 +71,7 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
 
             tagToShow = itemView.findViewById(R.id.tagShownButton);
 
+            tagToShow.setOnClickListener(this);
 
         }
 
@@ -77,5 +82,14 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
         }
 
 
+        @Override
+        public void onClick(View view) {
+            String send = tagLis[position];
+            Intent intent = new Intent(view.getContext(), Viewer.class);
+
+            intent.putExtra("activity","tag");
+            intent.putExtra("target",send);
+            view.getContext().startActivity(intent);
+        }
     }
 }
