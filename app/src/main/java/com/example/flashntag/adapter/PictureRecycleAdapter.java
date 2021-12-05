@@ -22,7 +22,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     private static final String TAG = PictureRecycleAdapter.class.getSimpleName();
     public List<Picture> pictureList;
     public LayoutInflater inflater;
-    //private  int position;
 
     private int ID;
 

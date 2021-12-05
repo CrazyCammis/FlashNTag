@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(view.getContext(), Viewer.class);
 
 
-                intent.putExtra("activity","mainTrue");
+                intent.putExtra("activity","all");
                 intent.putExtra("target","");
                 startActivity(intent);
             }

@@ -34,8 +34,8 @@ public class Viewer extends AppCompatActivity {
 
     private PictureRecycleAdapter pictureRecycleAdapter;
     private  RecyclerView pictureRecuycleView;
-    private String targetSent;
-    private String typeOfView;
+    private String targetSent = "";
+    private String typeOfView  = "";
 
 
     private String activitySentFrom;
@@ -51,10 +51,10 @@ public class Viewer extends AppCompatActivity {
         Intent intent =getIntent();
 
 
-        activitySentFrom = intent.getStringExtra("activity");
-        targetFromActivity = intent.getStringExtra("target");
+        typeOfView = intent.getStringExtra("activity");
+        targetSent = intent.getStringExtra("target");
 
-/*
+        /*
 
         /*
         firestoreDb = FirebaseFirestore.getInstance();
@@ -62,7 +62,7 @@ public class Viewer extends AppCompatActivity {
         //get the date or create the data*/
 
 
-    setDefault();
+
         setUpRecyclerView();
     }
 
@@ -79,30 +79,9 @@ public class Viewer extends AppCompatActivity {
 
 
 
-    private void setDefault() {
-        if (activitySentFrom.equals("mainTrue")) {
-            typeOfView = "all";
-            targetSent = "";
-        }
 
 
-        else if (activitySentFrom.equals("favoriteTrue")) {
-            typeOfView = "favorite";
-            targetSent = "";
-        }
 
-        else if (activitySentFrom.equals("tagTrue")) {
-            typeOfView = "tag";
-            targetSent = targetFromActivity;
-        }
-
-        else if (activitySentFrom.equals("dateTrue")) {
-            typeOfView = "date";
-            targetSent = targetFromActivity;
-        }
-
-
-}
 
 
 

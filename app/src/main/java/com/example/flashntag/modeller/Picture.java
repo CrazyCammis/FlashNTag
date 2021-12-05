@@ -2,8 +2,6 @@ package com.example.flashntag.modeller;
 
 import com.example.flashntag.R;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -15,12 +13,7 @@ public class Picture {
     private Date date;
     private int pictureID;
 
-
     private static ArrayList<String> allTags = new ArrayList<String>();
-
-
-
-
     public Date getDate() {
         return date;
     }
@@ -49,7 +42,7 @@ public class Picture {
     public static List<Picture> getData(String type, String targetTag) {
 
 
-        String[] tagged =  new String[]{"#Ani", "#Sam", "#Joe", "#Freedom", "#ThrowBack"};
+        String[] tagged =  new String[]{"#Ani", "#Sam", "#Joe", "#Freedom", "#ThrowBack", "ez"};
         ArrayList<Picture> dataList = new ArrayList<>();
 
         int[] images = getImages();
@@ -57,55 +50,62 @@ public class Picture {
         for(int i = 0; i < images.length; i ++){
             Date d1 = new Date();
             Picture picture = new Picture(images[i], d1,  tagged);
+            addtagListToallTags(tagged);
             dataList.add(picture);
         }
 
         ArrayList<Picture> holder = new ArrayList<>();
 
-       switch(type){
+      // switch(type){
 
-            case "tag":
-                //check for tags and add it to a holding list
-                for (Picture pictures : dataList) {
-                    String[] tags = pictures.getTags();
-                    for(int i = 0; i < tags.length; i++){
-                        if(tags[i].equals(targetTag)){
-                            holder.add(pictures);
-                        }
-                    }
+            //case "tag":
+           //check for tags and add it to a holding list
+           if(type.equals("tag")){
+               for (Picture pictures : dataList) {
+                   String[] tags = pictures.getTags();
+                   for (int i = 0; i < tags.length; i++) {
+                       if (tags[i].equals(targetTag)) {
+                           holder.add(pictures);
+                       }
+                   }
 
-                }
-                dataList = holder;
-            break;
+               }
+               dataList = holder;
+           }
+            //break;
 
             //favorited should be a reserved tag
-            case "favorite" :
+            //case "favorite" :
                               //check for tags and add it to a holding list
-                for (Picture pictures : dataList) {
-                    String[] tags = pictures.getTags();
-                    for(int i = 0; i < tags.length; i++){
-                        if(tags[i].equals("favorited")){
-                            holder.add(pictures);
-                        }
+         else if(type.equals("favorited")) {
+            for (Picture pictures : dataList) {
+                String[] tags = pictures.getTags();
+                for (int i = 0; i < tags.length; i++) {
+                    if (tags[i].equals("favorited")) {
+                        holder.add(pictures);
                     }
                 }
-                dataList = holder;
-                break;
+            }
+            dataList = holder;
+        }
+                //break;
 
-            case "date" :
+            else if(type.equals("date")) {
+
+                //case "date" :
                 //check for tags and add it to a holding list
                 for (Picture pictures : dataList) {
                     String date = pictures.getDate().toString();
 
-                        if(date.equals(targetTag)){
-                            holder.add(pictures);
+                    if (date.equals(targetTag)) {
+                        holder.add(pictures);
                     }
                 }
                 dataList = holder;
-                break;
-
-            default:break;
-       }
+                //break;
+            }
+            //default:break;
+       //}
 
         return  dataList;
     }
@@ -180,18 +180,31 @@ public class Picture {
     }
 
 
-    private static void addNewTagToTagList(String tag) {
+
+
+    private static void addTagToAllList(String tag) {
        if (!allTags.contains(tag)){
             allTags.add((tag));
             return;
-       }
+      }
     }
 
     public static ArrayList<String> getAllTags(){
-        addNewTagToTagList("addNewTagToTagList");
-        addNewTagToTagList("addNewTagToTsswagList");
-        addNewTagToTagList("s");
+        getData("","");
+
         return  allTags;
+    }
+
+    private static void addtagListToallTags(String[] tags){
+
+
+        for(int i = 0; i < tags.length; i++){
+            String checker = tags[i];
+            if(!checker.equals("") ||!(checker == "")){
+                addTagToAllList(checker);
+            }
+        }
+
     }
 
 }

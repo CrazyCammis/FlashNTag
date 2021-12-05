@@ -1,6 +1,8 @@
 package com.example.flashntag;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.flashntag.adapter.TagListRecylerAdapter;
 import com.example.flashntag.modeller.Picture;
 
 import java.util.ArrayList;
@@ -20,8 +23,10 @@ public class TagsActivity extends AppCompatActivity {
 
     private Button searchButton;
     private EditText editText;
+    private String text;
 
-    private   String[] tagList ;
+
+    private   String[] tagList ={} ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,34 +37,48 @@ public class TagsActivity extends AppCompatActivity {
         editText = findViewById(R.id.searchTagsText);
 
         searchButton = findViewById(R.id.searchButton);
+
+
+        tagList = Picture.getAllTags().toArray(new String[0]);
+
+        if(tagList.length > 21) {setmaxPreview(tagList);}
+        setUpRecycleView(tagList);
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Viewer.class);
 
-                String text;
+
+
                 text = editText.getText().toString();
-                tagList = new String[]{"a", "b"};
+
 
 
                 //Makes sure to see if we can find the targeted tag in the list, if not we wont be able start the intent
                     //HOLDER
-                if(checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
-
-
-
-
-                    startActivity(intent);
-                    intent.putExtra("activity", "tagTrue");
-                    intent.putExtra("target", text);
-                }
-
-                else{
-
+                if(!checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
                     Toast.makeText(view.getContext(),
                             "Tag " + text + " not found, try again",
                             Toast.LENGTH_SHORT).show();
                 }
+
+                else if (checkForTags(text)){
+                    Intent intent = new Intent(view.getContext(), Viewer.class);
+                    Toast.makeText(view.getContext(),
+                            "Tag " + text + " FOUND",
+                            Toast.LENGTH_SHORT).show();
+
+
+                    intent.putExtra("activity", "tag");
+                    intent.putExtra("target", text);
+
+                }
+
+
+
+
+
 
             }
         });
@@ -68,6 +87,16 @@ public class TagsActivity extends AppCompatActivity {
 
 
     //PROBLEM HERE IN CHECK FOR TAGS
+    public String[] setmaxPreview(String[] tagListtoReduce){
+        String[] holder = new String[20];
+
+        for (int i = 0; i < 20; i++) {
+            holder[i] = tagListtoReduce[i];
+            i++;
+        }
+        return holder;
+    }
+
 
     public  boolean checkForTags(String text) {
 
@@ -75,4 +104,13 @@ public class TagsActivity extends AppCompatActivity {
         if(allTags.contains(text)){return true;}
         else return false;
     }
+
+
+    private void setUpRecycleView(String[] tagList){
+        RecyclerView tagListRecycleView = findViewById(R.id.allTagsRecycleView);
+
+        tagListRecycleView.setAdapter(new TagListRecylerAdapter(this, tagList));
+        tagListRecycleView.setLayoutManager(new GridLayoutManager(this, 3));
+    }
+
 }

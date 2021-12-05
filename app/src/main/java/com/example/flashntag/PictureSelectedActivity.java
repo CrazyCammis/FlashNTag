@@ -26,7 +26,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
 
     private Picture picture;
-    private String[] tagList = {"pasta", "Pregnant Mario", "Pregnant Luigi", "Plane", "","Pregnant Sonic", "Pregnant Donald Duck"};
+    private String[] tagList = {};
 
     private Button addTag;
     private Button submitButton;
@@ -66,17 +66,12 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
 
 
-
-
         date.setText(picture.getDate().toString());
         pictureView.setImageResource(picture.getPictureID());
 
         setUpRecycleView(tagList);
-        //TODO: CREATE VIEW FROM DATA BASE WITH SELECTED PICTURE ID
         //TODO: DELETE FROM GALLERY SEE RECYCLBE VIEW LECTURE 55.00;
                 //TODO: REMOVE TAGS
-
-
 
 
         addTag = findViewById(R.id.addTagButton);
@@ -183,14 +178,14 @@ public class PictureSelectedActivity extends AppCompatActivity {
     public String[] sortList(String[] tagList){
         int count = 0;
         for(int i = 0; i < tagList.length; i++){
-            if(!tagList[i].equals("")){
+            if(!tagList[i].equals("")||!(tagList[i] == "")){
                 count++;
             }
         }
 
         String[] holder = new String[count];
         for(int i = 0; i < tagList.length; i++){
-            if(!tagList[i].equals("")){
+            if(!tagList[i].equals("") || !(tagList[i] == "")){
                 holder[i] = tagList[i];
             }
         }

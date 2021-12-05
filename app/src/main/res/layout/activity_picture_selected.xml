@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/selectedPicuture"
         android:layout_width="323dp"
-        android:layout_height="395dp"
+        android:layout_height="381dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
