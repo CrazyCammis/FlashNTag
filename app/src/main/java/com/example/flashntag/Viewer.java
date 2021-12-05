@@ -77,14 +77,6 @@ public class Viewer extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-
     private void setUpRecyclerView(){
          pictureRecuycleView = findViewById(R.id.recycleViewPage);
         pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList );

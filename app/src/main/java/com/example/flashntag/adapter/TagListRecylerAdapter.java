@@ -44,6 +44,12 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
         viewHolder.setTag(tagToDisplay, position);
     }
 
+    public void removeTag(int position){
+        tagLis[position] = null;
+        notifyDataSetChanged();
+
+    }
+
     @Override
     public int getItemCount() {
         int size =tagLis.length;
@@ -51,7 +57,8 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
         return size;
     }
 
-    public  class TagListViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+
+    public  class TagListViewHolder extends RecyclerView.ViewHolder {
         private Button tagToShow;
         private int position;
 
@@ -60,7 +67,6 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
 
             tagToShow = itemView.findViewById(R.id.tagShownButton);
 
-            itemView.setOnClickListener(this);
 
         }
 
@@ -71,9 +77,5 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
         }
 
 
-        @Override
-        public void onClick(View view) {
-
-        }
     }
 }

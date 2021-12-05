@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
     private String text;
+    private int postionInArray;
 
 
     private Picture picture;
@@ -37,11 +38,13 @@ public class PictureSelectedActivity extends AppCompatActivity {
     private ImageButton DELETE_PICTURE;
     private EditText inpuText;
 
-    private TextView date;
 
+    private TextView date;
     private ImageView pictureView;
 
-    PictureRecycleAdapter pictureRecycleAdapter;
+    private PictureRecycleAdapter pictureRecycleAdapter;
+    private RecyclerView tagListRecycleView;
+    private TagListRecylerAdapter tagListRecylerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +115,16 @@ public class PictureSelectedActivity extends AppCompatActivity {
             public void onClick(View view) {
                 text = editText.getText().toString();
                 String[] holder = tagList;
-                if(checkIfTagExist(holder, text)){
-                    Toast.makeText(view.getContext(), "Tag " + text + " removec :D" ,Toast.LENGTH_SHORT).show();
-                }
-                else if(text.equals("")){
+
+                if(text.equals("")){
                     Toast.makeText(view.getContext(), "Error, no tag inputed try again",Toast.LENGTH_SHORT).show();
 
                 }
+                else if(checkIfTagExist(holder, text)){
+                    Toast.makeText(view.getContext(), "Tag " + text + " removed :D" ,Toast.LENGTH_SHORT).show();
+                    //TODO ADD REMOVE FUNCITON
+                }
+
                 else{
                     Toast.makeText(view.getContext(), "Tag " + text + " not found, try again D:" ,Toast.LENGTH_SHORT).show();
 
@@ -153,10 +159,12 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
                 //ads to it
                 else{
-                    //adds to the empty spot
-                  /*  holder[holder.length] = text;
-                    //set the new array as the new one
-                    picture.setTags(holder);*/
+                    //TODO FIX THIS
+                    //adds to the first empty spot
+                    holder= addToTagList(text, holder);
+                                    //set the new array as the new one
+                    picture.setTags(holder);
+                    //tagListRecylerAdapter.notifyDataSetChanged();
                     Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
                 }
 
@@ -169,10 +177,20 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(),
                         "Picture Deleted",
                         Toast.LENGTH_SHORT).show();
-             //   pictureRecycleAdapter.removePicture(position);
+                pictureRecycleAdapter.removePicture(position);
             }
         });
 
+    }
+
+    private String[] addToTagList(String text, String[] holder) {
+        for(String e: holder){
+            if(e.equals("")){
+                e= text;
+                return holder;
+            }
+        }
+        return holder;
     }
 
 
@@ -180,7 +198,9 @@ public class PictureSelectedActivity extends AppCompatActivity {
         if(holder != null && holder.length == 0) {return false;}
 
         for(int i = 0; i <holder.length; i++){
-            if(holder[i].equals(tag.toLowerCase())){return true;}
+            if(holder[i].equals(tag.toLowerCase())){
+                postionInArray = i;
+                return true;}
         }
         return  false;
     }
@@ -227,7 +247,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
     }
 
     private void setUpRecycleView(String[] tagList){
-        RecyclerView tagListRecycleView = findViewById(R.id.tagRecyclerView);
+        tagListRecycleView = findViewById(R.id.tagRecyclerView);
 
         tagListRecycleView.setAdapter(new TagListRecylerAdapter(this, tagList));
         tagListRecycleView.setLayoutManager(new GridLayoutManager(this, 3));
