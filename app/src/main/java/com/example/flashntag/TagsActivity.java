@@ -36,19 +36,20 @@ public class TagsActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.searchTagsText);
 
-        searchButton = findViewById(R.id.searchButton);
+        searchButton = findViewById(R.id.searchButtonClick);
 
 
         tagList = Picture.getAllTags().toArray(new String[0]);
 
-        if(tagList.length > 21) {setmaxPreview(tagList);}
-        setUpRecycleView(tagList);
+        if(tagList.length >21){
+            limitList(tagList);
+        }
 
+        setUpRecycleView(tagList);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
 
                 text = editText.getText().toString();
@@ -56,45 +57,43 @@ public class TagsActivity extends AppCompatActivity {
 
 
                 //Makes sure to see if we can find the targeted tag in the list, if not we wont be able start the intent
-                    //HOLDER
-                if(!checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
+                //HOLDER
+                if(checkForTags(text))/*FINDS THE TAG IN THE LIST"*/ {
+
+                    Intent intent = new Intent(view.getContext(), Viewer.class);
+
+
+                    intent.putExtra("activity", "tag");
+                    intent.putExtra("target", text);
+                    startActivity(intent);
+
+                }
+
+                else{
+
                     Toast.makeText(view.getContext(),
                             "Tag " + text + " not found, try again",
                             Toast.LENGTH_SHORT).show();
                 }
 
-                else if (checkForTags(text)){
-                    Intent intent = new Intent(view.getContext(), Viewer.class);
-                    Toast.makeText(view.getContext(),
-                            "Tag " + text + " FOUND",
-                            Toast.LENGTH_SHORT).show();
-
-
-                    intent.putExtra("activity", "tag");
-                    intent.putExtra("target", text);
-
-                }
-
-
-
-
-
-
             }
+
         });
+
+
 
     }
 
-
     //PROBLEM HERE IN CHECK FOR TAGS
-    public String[] setmaxPreview(String[] tagListtoReduce){
-        String[] holder = new String[20];
-
-        for (int i = 0; i < 20; i++) {
-            holder[i] = tagListtoReduce[i];
-            i++;
+    public void limitList(String[] tagListtoReduce) {
+        if (tagListtoReduce.length > 20) {
+            String[] holder = new String[21];
+            for (int i = 0; i < 20; i++) {
+                holder[i] = tagList[i];
+                i++;
+            }
+            tagList = holder;
         }
-        return holder;
     }
 
 

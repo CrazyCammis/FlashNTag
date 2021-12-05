@@ -42,13 +42,28 @@ public class Picture {
     public static List<Picture> getData(String type, String targetTag) {
 
 
-        String[] tagged =  new String[]{"#Ani", "#Sam", "#Joe", "#Freedom", "#ThrowBack", "ez"};
+
+        String[] tagged ={};
+        String[] tagged1 =  new String[]{"#ani", "#aniiken skywalker", "#joe", "#jreedom", "#throwback", "ez", "a"};
+        String[] tagged2 =  new String[]{"danni", "yolo", "#sadLife", "#Freedom", "#ThrowBack", "a", "holder1", "jobb", "sjokolade",
+        "ferie", "lang", "who cares", "wohooo"};
         ArrayList<Picture> dataList = new ArrayList<>();
 
         int[] images = getImages();
 
         for(int i = 0; i < images.length; i ++){
+
+            if(i%2 == 0){
+                tagged = tagged2;
+            }
+            else{
+                tagged= tagged1;
+            }
+
+
+
             Date d1 = new Date();
+
             Picture picture = new Picture(images[i], d1,  tagged);
             addtagListToallTags(tagged);
             dataList.add(picture);

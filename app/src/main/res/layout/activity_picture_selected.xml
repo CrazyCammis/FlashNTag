@@ -10,11 +10,10 @@
         android:id="@+id/selectedPicuture"
         android:layout_width="323dp"
         android:layout_height="381dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047"
         app:srcCompat="@drawable/captain_america_civil_war" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,8 +21,9 @@
         android:layout_width="337dp"
         android:layout_height="151dp"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/addTagButton"
+        android:background="#D5A8A8"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +38,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951"
+        app:layout_constraintVertical_bias="0.934"
         tools:visibility="visible" />
 
     <Button
@@ -52,39 +53,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toEndOf="@+id/addTagText"
+        app:layout_constraintStart_toEndOf="@+id/inputText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.955"
-        tools:visibility="visible" />
+        tools:visibility="invisible" />
 
     <EditText
-        android:id="@+id/addTagText"
+        android:id="@+id/inputText"
         android:layout_width="121dp"
         android:layout_height="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="8dp"
+        android:background="#1A54E8"
+        android:backgroundTintMode="add"
         android:ems="10"
         android:inputType="textPersonName"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953"
-        tools:visibility="visible"
-        tools:text="@tools:sample/cities" />
+        app:layout_constraintVertical_bias="0.948"
+        tools:text="@tools:sample/cities"
+        tools:visibility="visible" />
 
     <Button
-        android:id="@+id/cancellAddButton"
+        android:id="@+id/cancellButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Cancel"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addTagText"
-        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintEnd_toStartOf="@+id/inputText"
+        app:layout_constraintHorizontal_bias="0.673"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956"
+        app:layout_constraintVertical_bias="0.951"
         tools:visibility="visible" />
 
     <TextView
@@ -109,5 +114,34 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/btn_dialog"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/removeTagButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Remove Tag"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toEndOf="@+id/addTagButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.934"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/confirmDeleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Tag"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.861"
+        app:layout_constraintStart_toEndOf="@+id/inputText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.example.flashntag;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +21,7 @@ public class AddImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_image);
 
 
-        editText = findViewById(R.id.addTagText);
+        editText = findViewById(R.id.inputText);
 
         addImageButton = findViewById(R.id.addImageFromGalleryBtn);
         addTagBtn = findViewById(R.id.addTagButton);
@@ -43,7 +42,7 @@ public class AddImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text;
-                text = editText.getText().toString();
+                text = editText.getText().toString().toString();
 
                if(canBeAddedToTag(text)){
                     tagList[tagList.length] = text;

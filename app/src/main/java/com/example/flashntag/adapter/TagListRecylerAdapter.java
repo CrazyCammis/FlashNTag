@@ -16,8 +16,9 @@ import com.example.flashntag.R;
 public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAdapter.TagListViewHolder>{
     private static final String TAG = TagListRecylerAdapter.class.getSimpleName();
 
-    private String[] tagLis = new String[20];
+    private String[] tagLis = {};
     private LayoutInflater inflater;
+
 
     public TagListRecylerAdapter(Context context, String[] tagList){
         this.inflater = LayoutInflater.from(context);
@@ -40,7 +41,7 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
 
         Log.d(TAG, "onBindViewHolder " + tagToDisplay + " "  + position);
 
-        viewHolder.setTag(tagToDisplay);
+        viewHolder.setTag(tagToDisplay, position);
     }
 
     @Override
@@ -50,18 +51,28 @@ public class TagListRecylerAdapter extends RecyclerView.Adapter<TagListRecylerAd
         return size;
     }
 
-    public  class TagListViewHolder extends RecyclerView.ViewHolder{
+    public  class TagListViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         private Button tagToShow;
+        private int position;
 
         public TagListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tagToShow = itemView.findViewById(R.id.tagShownButton);
 
+            itemView.setOnClickListener(this);
+
         }
 
-        public  void setTag(String tag){
+        public  void setTag(String tag, int position){
             tagToShow.setText(tag);
+            this.position = position;
+
+        }
+
+
+        @Override
+        public void onClick(View view) {
 
         }
     }

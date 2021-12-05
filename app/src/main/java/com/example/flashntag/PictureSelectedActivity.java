@@ -2,7 +2,6 @@ package com.example.flashntag;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -23,16 +22,20 @@ import java.util.ArrayList;
 
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
+    private String text;
 
 
     private Picture picture;
     private String[] tagList = {};
 
-    private Button addTag;
-    private Button submitButton;
-    private Button cancelTag;
+    private Button addTagBtn;
+    private Button confirmAddTagBtn;
+    private Button cancelBtn;
+    private Button removeTagBtn;
+    private Button confirmDeleteBtn;
+
     private ImageButton DELETE_PICTURE;
-    private EditText addTagText;
+    private EditText inpuText;
 
     private TextView date;
 
@@ -74,57 +77,89 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 //TODO: REMOVE TAGS
 
 
-        addTag = findViewById(R.id.addTagButton);
+        addTagBtn = findViewById(R.id.addTagButton);
         DELETE_PICTURE = findViewById(R.id.deletePicture);
-        editText = findViewById(R.id.addTagText);
-        submitButton = findViewById(R.id.submitTagButton);
-        cancelTag = findViewById(R.id.cancellAddButton);
-        addTagText = findViewById(R.id.addTagText);
+        editText = findViewById(R.id.inputText);
+        confirmAddTagBtn = findViewById(R.id.submitTagButton);
+        cancelBtn = findViewById(R.id.cancellButton);
+        inpuText = findViewById(R.id.inputText);
+        removeTagBtn = findViewById(R.id.removeTagButton);
+        confirmDeleteBtn = findViewById(R.id.confirmDeleteBtn);
 
-        addTag.setOnClickListener(new View.OnClickListener() {
+        addTagBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showInput();
+                showAddInput();
             }
         });
 
-        cancelTag.setOnClickListener(new View.OnClickListener() {
+        removeTagBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideInput();
+            showDeleteTagInput();
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideAddInput();
+            }
+        });
+
+        confirmDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                text = editText.getText().toString();
+                String[] holder = tagList;
+                if(checkIfTagExist(holder, text)){
+                    Toast.makeText(view.getContext(), "Tag " + text + " removec :D" ,Toast.LENGTH_SHORT).show();
+                }
+                else if(text.equals("")){
+                    Toast.makeText(view.getContext(), "Error, no tag inputed try again",Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    Toast.makeText(view.getContext(), "Tag " + text + " not found, try again D:" ,Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 
 
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        confirmAddTagBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {/*
-                String text;
+            public void onClick(View view) {
                 text = editText.getText().toString();
                 String[] holder = tagList;
 
-                if(text == null ){
+
+
+                if(text == null || text.equals("")){
                     Toast.makeText(view.getContext(), "Error, no tag inputed try again", Toast.LENGTH_SHORT).show();
                 }
 
-                else if(checkIfTagExist(holder, text)){
-                    Toast.makeText(view.getContext(), "Error, tag alreadt in list", Toast.LENGTH_SHORT).show();
-                }
 
                 else if(holder.length > 20){
                     Toast.makeText(view.getContext(), "Tag list full", Toast.LENGTH_SHORT).show();
                 }
+                else if(checkIfTagExist(holder, text)){
+                    Toast.makeText(view.getContext(), "Error, tag alreadt in list", Toast.LENGTH_SHORT).show();
+                }
+
+
 
                 //ads to it
                 else{
                     //adds to the empty spot
-                    holder[holder.length] = text;
+                  /*  holder[holder.length] = text;
                     //set the new array as the new one
-                    picture.setTags(holder);
+                    picture.setTags(holder);*/
                     Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
-                }*/
-                Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -132,7 +167,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(),
-                        "Tag Deleted",
+                        "Picture Deleted",
                         Toast.LENGTH_SHORT).show();
              //   pictureRecycleAdapter.removePicture(position);
             }
@@ -140,31 +175,55 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
     }
 
+
     private boolean checkIfTagExist(String[] holder, String tag) {
-        if(holder != null && holder.length > 0) {return false;}
+        if(holder != null && holder.length == 0) {return false;}
 
         for(int i = 0; i <holder.length; i++){
-            if(holder[i].equals( tag)){return true;}
+            if(holder[i].equals(tag.toLowerCase())){return true;}
         }
         return  false;
     }
 
-    private void showInput() {
+    private void showAddInput() {
         editText.setVisibility(View.VISIBLE);
-        addTagText.setVisibility(View.VISIBLE);
-        submitButton.setVisibility(View.VISIBLE);
-        cancelTag.setVisibility(View.VISIBLE);
-       DELETE_PICTURE.setVisibility(View.INVISIBLE);
-        addTag.setVisibility(View.INVISIBLE);
+        inpuText.setVisibility(View.VISIBLE);
+        confirmAddTagBtn.setVisibility(View.VISIBLE);
+        cancelBtn.setVisibility(View.VISIBLE);
+        DELETE_PICTURE.setVisibility(View.INVISIBLE);
+        addTagBtn.setVisibility(View.INVISIBLE);
+        removeTagBtn.setVisibility(View.INVISIBLE);
     }
 
-    private void hideInput(){
+    private void hideAddInput(){
         editText.setVisibility(View.INVISIBLE);
-        addTagText.setVisibility(View.INVISIBLE);
-        submitButton.setVisibility(View.INVISIBLE);
+        inpuText.setVisibility(View.INVISIBLE);
+        confirmAddTagBtn.setVisibility(View.INVISIBLE);
+        cancelBtn.setVisibility(View.INVISIBLE);
+        confirmDeleteBtn.setVisibility(View.INVISIBLE);
+
         DELETE_PICTURE.setVisibility(View.VISIBLE);
-        addTag.setVisibility(View.VISIBLE);
-        cancelTag.setVisibility(View.INVISIBLE);
+        addTagBtn.setVisibility(View.VISIBLE);
+        removeTagBtn.setVisibility(View.VISIBLE);
+    }
+
+    private void showDeleteTagInput() {
+        inpuText.setVisibility(View.INVISIBLE);
+        addTagBtn.setVisibility(View.INVISIBLE);
+        removeTagBtn.setVisibility(View.INVISIBLE);
+        DELETE_PICTURE.setVisibility(View.INVISIBLE);
+
+        cancelBtn.setVisibility(View.VISIBLE);
+        editText.setVisibility(View.VISIBLE);
+        confirmDeleteBtn.setVisibility(View.VISIBLE);
+    }
+
+    private  void hideDeleteTagInput(){
+        editText.setVisibility(View.INVISIBLE);
+        cancelBtn.setVisibility(View.INVISIBLE);
+
+        inpuText.setVisibility(View.VISIBLE);
+        DELETE_PICTURE.setVisibility(View.VISIBLE);
     }
 
     private void setUpRecycleView(String[] tagList){
