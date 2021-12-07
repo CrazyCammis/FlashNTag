@@ -1,7 +1,6 @@
 package com.example.flashntag.modeller;
 
 import com.example.flashntag.R;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +21,6 @@ public class Picture {
     public void setDate(Date date) {
         this.date = date;
     }
-
-
 
 
     //ImageID, Type, Descrition
@@ -55,14 +52,18 @@ public class Picture {
         int[] images = getImages();
 
         for(int i = 0; i < images.length; i ++){
-            //generates different tags for every second one
+
             if(i%2 == 0){
                 tagged = tagged2;
             }
             else{
                 tagged= tagged1;
             }
+
+
+
             Date d1 = new Date();
+
             Picture picture = new Picture(images[i], d1,  tagged);
             addtagListToallTags(tagged);
             dataList.add(picture);
