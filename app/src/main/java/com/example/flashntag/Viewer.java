@@ -30,12 +30,8 @@ import java.util.List;
 public class Viewer extends AppCompatActivity {
     private static final String TAG = Viewer.class.getSimpleName();
 
-    private static final String TYPE_OF_VIEW = "all";
+
     private List<Picture> pictureList;
-    private List<Integer> pictureIDList;
-
-
-
 
     private FirebaseFirestore firestoreDb;
     private CollectionReference pictureColReference;
@@ -47,10 +43,14 @@ public class Viewer extends AppCompatActivity {
     private String targetSent = "";
     private String typeOfView = "";
 
-    private List<Picture> picturessToDb;
 
+
+
+    //used
     private String activitySentFrom;
     private String targetFromActivity;
+    private List<Picture> picturessToDb;
+
 
 
     @Override
