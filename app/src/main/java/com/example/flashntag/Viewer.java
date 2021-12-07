@@ -10,11 +10,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
 import com.example.flashntag.modeller.Picture;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -42,6 +45,9 @@ public class Viewer extends AppCompatActivity {
     private String targetSent = "";
     private String typeOfView = "";
 
+    FirebaseAuth auth;
+    FirebaseAuth.AuthStateListener authStateListener;
+
 
     //used
     private String activitySentFrom;
@@ -55,6 +61,8 @@ public class Viewer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer);
+
+
 
         Intent intent = getIntent();
 
@@ -80,6 +88,7 @@ public class Viewer extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        auth.addAuthStateListener(authStateListener);
         createFirestoreReadListener();
 
         // if(fireStorelistenerRegistration != null){
@@ -90,6 +99,7 @@ public class Viewer extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        auth.removeAuthStateListener(authStateListener);
         if (fireStorelistenerRegistration != null) {
 
         }

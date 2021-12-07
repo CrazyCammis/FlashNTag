@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1091422067974",
-    "project_id": "flashntag",
-    "storage_bucket": "flashntag.appspot.com"
+    "project_number": "862101194242",
+    "project_id": "flashntag-e689a",
+    "storage_bucket": "flashntag-e689a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1091422067974:android:48d316670000777d7e5287",
+        "mobilesdk_app_id": "1:862101194242:android:452f1dc60ebe9d5a62091b",
         "android_client_info": {
           "package_name": "com.example.flashntag"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1091422067974-k1paa1kkjlaatkbej6vojv9906h8hbo1.apps.googleusercontent.com",
+          "client_id": "862101194242-5rofqko2v1d17l0cqs2lftr03d021ui7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCiBerk5RDlrjz9kee5cAoPKriTuF6T2Q4"
+          "current_key": "AIzaSyCSrWu7cY5UeO2qxis9eTypY9p6qa9hHL8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1091422067974-k1paa1kkjlaatkbej6vojv9906h8hbo1.apps.googleusercontent.com",
+              "client_id": "862101194242-5rofqko2v1d17l0cqs2lftr03d021ui7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

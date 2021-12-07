@@ -87,7 +87,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     DocumentSnapshot documentSnapshot = task.getResult();
                     Picture picture = documentSnapshot.toObject(Picture.class);
-                    picture.setPictureID(documentSnapshot.getId());
+                    //picture.setPictureID(documentSnapshot.getId());
 
                     date.setText(picture.getDate().toString());
                     pictureView.setImageResource(picture.getPictureID());
