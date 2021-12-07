@@ -1,7 +1,6 @@
 package com.example.flashntag.modeller;
 
 import com.example.flashntag.R;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class Picture {
 
-    private String fileName;
+    private String fileURL;
     private String[] tags ;
     private Date date;
     private int pictureID;
@@ -28,11 +27,11 @@ public class Picture {
 
 
     //ImageID, Type, Descrition
-    public Picture(int pictureID, /*String fileName*/ Date date, String[] tags ) {
-       // this.fileName = fileName;
+    public Picture(int pictureID,  Date date, String[] tags, String fileURL ) {
         this.tags = tags;
         this.date = date;
         this.pictureID = pictureID;
+        this.fileURL = fileURL;
     }
 //TODO, finne ut hvordan vi skal lagre data og så lage get data fra dette
 
@@ -64,7 +63,7 @@ public class Picture {
                 tagged= tagged1;
             }
             Date d1 = new Date();
-            Picture picture = new Picture(images[i], d1,  tagged);
+            Picture picture = new Picture(images[i], d1,  tagged, "");
             addtagListToallTags(tagged);
             dataList.add(picture);
         }
@@ -154,12 +153,12 @@ public class Picture {
         this.pictureID = pictureID;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFileURL() {
+        return fileURL;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setFileURL(String fileURL) {
+        this.fileURL = fileURL;
     }
 
     public  String[] getTags() {

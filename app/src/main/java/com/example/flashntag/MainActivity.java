@@ -7,14 +7,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.firebase.ui.auth.AuthUI;
-
-import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
     private  final int RC_SIGN_IN = 1;
 
+    private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
+            new FirebaseAuthUIActivityResultContract(),
+            new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
+                @Override
+                public void onActivityResult(FirebaseAuthUIAuthenticationResult result) {
+                    onSignInResult(result);
+                }
+            }
+    );
 
 
     @Override
@@ -43,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AuthUI.getInstance().signOut(getApplicationContext()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                AuthUI.getInstance().signOut(getApplicationContext())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(getApplicationContext(), "Signed signed out", Toast.LENGTH_LONG);
@@ -62,21 +72,16 @@ public class MainActivity extends AppCompatActivity {
                             new AuthUI.IdpConfig.EmailBuilder().build());
 
 
-
-
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(providers)
-                                    .build(),
-                            RC_SIGN_IN);
+                    signInLauncher.launch(AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build());
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Signed in as " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
                 }
             }
         };
-
 
 
         openGallery = findViewById(R.id.openGallery);
@@ -103,19 +108,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode != RC_SIGN_IN)
-            return;
 
-        if (resultCode == RESULT_OK) {
-            FirebaseUser currentUser = auth.getCurrentUser();
-            Toast.makeText(getApplicationContext(), "Signed in as " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "Signed in cancelled", Toast.LENGTH_LONG);
-        }
-    }
+
 
     @Override
     protected void onResume() {
@@ -135,6 +129,18 @@ public class MainActivity extends AppCompatActivity {
         /*if (fireStorelistenerRegistration != null) {
 
         }*/
+    }
+
+
+    protected void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
+
+        if (result.getResultCode() == RESULT_OK) {
+            FirebaseUser currentUser = auth.getCurrentUser();
+            Toast.makeText(getApplicationContext(), "Signed in as " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Signed in cancelled", Toast.LENGTH_LONG).show();
+        }
     }
 
 }

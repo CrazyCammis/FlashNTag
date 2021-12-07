@@ -1,7 +1,6 @@
 package com.example.flashntag.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.flashntag.PictureSelectedActivity;
 import com.example.flashntag.R;
 import com.example.flashntag.modeller.Picture;
 
@@ -54,7 +52,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         //hva skal vi vise
         Picture pictureToShow = pictureList.get(position);
 
-        Log.d(TAG, "onBindViewHolde" + pictureToShow.getFileName() + " - " + position);
+        Log.d(TAG, "onBindViewHolde" + pictureToShow.getFileURL() + " - " + position);
 
         viewHolder.setPicture(pictureToShow, position);
 
