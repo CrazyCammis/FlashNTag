@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.flashntag.adapter.PictureRecycleAdapter;
 import com.example.flashntag.modeller.Picture;
@@ -31,26 +32,23 @@ public class Viewer extends AppCompatActivity {
     private static final String TAG = Viewer.class.getSimpleName();
 
 
-    private List<Picture> pictureList;
-
     private FirebaseFirestore firestoreDb;
     private CollectionReference pictureColReference;
     private ListenerRegistration fireStorelistenerRegistration;
 
 
-    private PictureRecycleAdapter pictureRecycleAdapter;
-    private RecyclerView pictureRecuycleView;
+    private PictureRecycleAdapter picRecycleAdapt;
+    private RecyclerView picRecycleView;
     private String targetSent = "";
     private String typeOfView = "";
-
-
 
 
     //used
     private String activitySentFrom;
     private String targetFromActivity;
     private List<Picture> picturessToDb;
-
+    private List<Picture> pictureList;
+    private List<Integer> pictureIDList;
 
 
     @Override
@@ -92,21 +90,34 @@ public class Viewer extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(fireStorelistenerRegistration != null){
+        if (fireStorelistenerRegistration != null) {
 
         }
     }
 
     private void setUpRecyclerView() {
-        pictureRecuycleView = findViewById(R.id.recycleViewPage);
-        pictureRecycleAdapter = new PictureRecycleAdapter(this, pictureList);
+        picRecycleView = findViewById(R.id.recycleViewPage);
+        picRecycleAdapt = new PictureRecycleAdapter(this, pictureList);
 
 
+        picRecycleAdapt.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              int position =   picRecycleView.getChildAdapterPosition(view);
+
+              Picture picture  = pictureList.get(position);
+
+                Intent intent = new Intent(view.getContext(), PictureSelectedActivity.class);
+                //should get the ID from he currently selected
+                intent.putExtra("PIC_ID", position);
+                view.getContext().startActivity(intent);
+            }
+        });
         //gets the lists
 
-        pictureRecuycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
+        picRecycleView.setAdapter(new PictureRecycleAdapter(this, Picture.getData(typeOfView, targetSent)));
 
-        pictureRecuycleView.setLayoutManager(new GridLayoutManager(this, 3));
+        picRecycleView.setLayoutManager(new GridLayoutManager(this, 3));
 
     }
 
@@ -123,7 +134,7 @@ public class Viewer extends AppCompatActivity {
                         pictureList.add(picture);
                         pictureIDList.add(picture.getPictureID());
                     }
-                    pictureRecycleAdapter.notifyDataSetChanged();
+                    picRecycleAdapt.notifyDataSetChanged();
                 } else {
                     Log.d(TAG, "Error getting documents " + task.getException());
                 }
@@ -150,15 +161,15 @@ public class Viewer extends AppCompatActivity {
                         case ADDED:
                             pictureList.add(picture);
                             pictureIDList.add(picture.getPictureID());
-                            pictureRecycleAdapter.notifyItemInserted(pictureList.size());
+                            picRecycleAdapt.notifyItemInserted(pictureList.size());
                         case REMOVED:
                             pictureList.remove(pos);
                             pictureIDList.remove(pos);
-                            pictureRecycleAdapter.notifyItemRemoved(pos);
+                            picRecycleAdapt.notifyItemRemoved(pos);
                             ;
                         case MODIFIED:
                             pictureList.set(pos, picture);
-                            pictureRecycleAdapter.notifyItemChanged(pos);
+                            picRecycleAdapt.notifyItemChanged(pos);
                             break;
                     }
                 }

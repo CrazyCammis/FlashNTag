@@ -1,11 +1,13 @@
 package com.example.flashntag;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +19,17 @@ import android.widget.Toast;
 import com.example.flashntag.adapter.PictureRecycleAdapter;
 import com.example.flashntag.adapter.TagListRecylerAdapter;
 import com.example.flashntag.modeller.Picture;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class PictureSelectedActivity extends AppCompatActivity {
+    public  static  final String TAG = PictureSelectedActivity.class.getSimpleName();
+
     private EditText editText;
     private String text;
     private int postionInArray;
@@ -54,31 +63,11 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
 
         int position = intent.getIntExtra("PIC_ID", 1);
+
+
         //sets the ID for the entire file
         pictureView = findViewById(R.id.selectedPicuture);
         date = findViewById(R.id.dateOfPicture);
-
-
-
-        ArrayList<Picture> dataList;
-        dataList = (ArrayList<Picture>) Picture.getData("", "");
-        picture = dataList.get(position);
-
-
-
-        //returns array that only have the tags, removes any ampty one from the count
-        tagList= picture.getTags();
-        //tagList = sortList(tagList);
-
-
-
-        date.setText(picture.getDate().toString());
-        pictureView.setImageResource(picture.getPictureID());
-
-        setUpRecycleView(tagList);
-        //TODO: DELETE FROM GALLERY SEE RECYCLBE VIEW LECTURE 55.00;
-                //TODO: REMOVE TAGS
-
 
         addTagBtn = findViewById(R.id.addTagButton);
         DELETE_PICTURE = findViewById(R.id.deletePicture);
@@ -88,6 +77,50 @@ public class PictureSelectedActivity extends AppCompatActivity {
         inpuText = findViewById(R.id.inputText);
         removeTagBtn = findViewById(R.id.removeTagButton);
         confirmDeleteBtn = findViewById(R.id.confirmDeleteBtn);
+
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = firebaseFirestore.collection("pictures").document(String.valueOf(position));
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot documentSnapshot = task.getResult();
+                    Picture picture = documentSnapshot.toObject(Picture.class);
+                    picture.setPictureID(documentSnapshot.getId());
+
+                    date.setText(picture.getDate().toString());
+                    pictureView.setImageResource(picture.getPictureID());
+                    tagList= picture.getTags();
+                    setUpRecycleView(tagList);
+                }
+                else{
+                    Log.d(TAG, "Get failed with ", task.getException());
+                }
+            }
+        });
+
+
+/*
+        ArrayList<Picture> dataList;
+        dataList = (ArrayList<Picture>) Picture.getData("", "");
+        picture = dataList.get(position);
+*/
+
+
+        //returns array that only have the tags, removes any ampty one from the count
+
+        //tagList = sortList(tagList);
+
+
+
+
+
+
+        //TODO: DELETE FROM GALLERY SEE RECYCLBE VIEW LECTURE 55.00;
+                //TODO: REMOVE TAGS
+
+
 
         addTagBtn.setOnClickListener(new View.OnClickListener() {
             @Override

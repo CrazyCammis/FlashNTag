@@ -23,8 +23,13 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
     public List<Picture> pictureList;
     public LayoutInflater inflater;
 
+    private  View.OnClickListener clickListener;
+
     private int ID;
 
+    public void setOnItemClickListener(View.OnClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
     //Picturelist er generert fra getData() i Picture klassen
     public PictureRecycleAdapter(Context context, List<Picture> pictureList) {
@@ -60,7 +65,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
         return pictureList.size();
     }
 
-    public class PictureViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class PictureViewHolder extends RecyclerView.ViewHolder{
 
         //The  references to picture and text
         private TextView typeTextView;
@@ -76,8 +81,6 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             pictureImageView = itemView.findViewById(R.id.pictureImageView);
 
             //sets on click
-            itemView.setOnClickListener(this);
-
         }
 
 
@@ -92,15 +95,7 @@ public class PictureRecycleAdapter extends  RecyclerView.Adapter<PictureRecycleA
             this.position =  position;
         }
 
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(), PictureSelectedActivity.class);
 
-            //should get the ID from he currently selected
-          intent.putExtra("PIC_ID", position);
-            view.getContext().startActivity(intent);
-
-        }
     }
 
 

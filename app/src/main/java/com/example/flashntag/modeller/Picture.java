@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Picture {
+
     private String fileName;
     private String[] tags ;
     private Date date;
