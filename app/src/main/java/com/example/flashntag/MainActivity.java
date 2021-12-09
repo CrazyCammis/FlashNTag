@@ -1,16 +1,13 @@
 package com.example.flashntag;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
-    ImageButton openGallery, openCamera, openTagActivity, addImageButton;
-
-
+    ImageButton openGallery,  openTagActivity, addImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,60 +15,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         openGallery = findViewById(R.id.openGallery);
-        openGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Viewer.class);
+        openGallery.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), Viewer.class);
 
 
-                intent.putExtra("activity","all");
-                intent.putExtra("target","");
-                startActivity(intent);
-            }
+            intent.putExtra("activity","all");
+            intent.putExtra("target","");
+            startActivity(intent);
         });
 
-        openCamera = findViewById(R.id.btnOpenCamera);
-        openCamera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //insert open cam intent here
-                /*Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                startActivity(intent);*/
-            }
-        });
 
         openTagActivity = findViewById(R.id.openTag);
-        openTagActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),TagsActivity.class );
-                startActivity(intent);
-            }
+        openTagActivity.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(),TagsActivity.class );
+            startActivity(intent);
         });
 
 
-        addImageButton = findViewById(R.id.btnAddImage);
-        addImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent    = new Intent (view.getContext(), AddImageActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
-
-
     }
 
-    public void onGalleryBtnClick (View view) {
-        Intent openGallery = new Intent(this, TagsActivity.class);
-        startActivity(openGallery);
-    }
 
-    public void onCameraBtnClick (View view) {
-
-    }
 }

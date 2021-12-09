@@ -1,9 +1,5 @@
 package com.example.flashntag;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.flashntag.adapter.PictureRecycleAdapter;
 import com.example.flashntag.adapter.TagListRecylerAdapter;
 import com.example.flashntag.modeller.Picture;
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class PictureSelectedActivity extends AppCompatActivity {
     private EditText editText;
     private String text;
-    private int postionInArray;
 
 
     private Picture picture;
@@ -36,14 +35,10 @@ public class PictureSelectedActivity extends AppCompatActivity {
     private Button confirmDeleteBtn;
 
     private ImageButton DELETE_PICTURE;
-    private EditText inpuText;
 
 
-    private TextView date;
-    private ImageView pictureView;
 
     private PictureRecycleAdapter pictureRecycleAdapter;
-    private RecyclerView tagListRecycleView;
     private TagListRecylerAdapter tagListRecylerAdapter;
 
     @Override
@@ -55,8 +50,8 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
         int position = intent.getIntExtra("PIC_ID", 1);
         //sets the ID for the entire file
-        pictureView = findViewById(R.id.selectedPicuture);
-        date = findViewById(R.id.dateOfPicture);
+        ImageView pictureView = findViewById(R.id.selectedPicuture);
+        TextView date = findViewById(R.id.dateOfPicture);
 
 
 
@@ -85,108 +80,82 @@ public class PictureSelectedActivity extends AppCompatActivity {
         editText = findViewById(R.id.inputText);
         confirmAddTagBtn = findViewById(R.id.submitTagButton);
         cancelBtn = findViewById(R.id.cancellButton);
-        inpuText = findViewById(R.id.inputText);
         removeTagBtn = findViewById(R.id.removeTagButton);
         confirmDeleteBtn = findViewById(R.id.confirmDeleteBtn);
 
-        addTagBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAddInput();
-            }
-        });
+        addTagBtn.setOnClickListener(view -> showAddInput());
 
-        removeTagBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            showDeleteTagInput();
-            }
-        });
+        removeTagBtn.setOnClickListener(view -> showDeleteTagInput());
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideAddInput();
-            }
-        });
+        cancelBtn.setOnClickListener(view -> hideAddInput());
 
-        confirmDeleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                text = editText.getText().toString();
-                String[] holder = tagList;
+        confirmDeleteBtn.setOnClickListener(view -> {
+            text = editText.getText().toString();
+            String[] holder = tagList;
 
-                if(text.equals("")){
-                    Toast.makeText(view.getContext(), "Error, no tag inputed try again",Toast.LENGTH_SHORT).show();
-
-                }
-                else if(checkIfTagExist(holder, text)){
-                    Toast.makeText(view.getContext(), "Tag " + text + " removed :D" ,Toast.LENGTH_SHORT).show();
-                    //TODO ADD REMOVE FUNCITON
-                }
-
-                else{
-                    Toast.makeText(view.getContext(), "Tag " + text + " not found, try again D:" ,Toast.LENGTH_SHORT).show();
-
-                }
+            if(text.equals("")){
+                Toast.makeText(view.getContext(), "Error, no tag inputed try again",Toast.LENGTH_SHORT).show();
 
             }
+            else if(checkIfTagExist(holder, text)){
+                Toast.makeText(view.getContext(), "Tag " + text + " removed :D" ,Toast.LENGTH_SHORT).show();
+                //TODO ADD REMOVE FUNCITON
+            }
+
+            else{
+                Toast.makeText(view.getContext(), "Tag " + text + " not found, try again D:" ,Toast.LENGTH_SHORT).show();
+
+            }
+
         });
 
 
 
-        confirmAddTagBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                text = editText.getText().toString();
-                String[] holder = tagList;
+        confirmAddTagBtn.setOnClickListener(view -> {
+            text = editText.getText().toString();
+            String[] holder = tagList;
 
 
 
-                if(text == null || text.equals("")){
-                    Toast.makeText(view.getContext(), "Error, no tag inputed try again", Toast.LENGTH_SHORT).show();
-                }
-
-
-                else if(holder.length > 20){
-                    Toast.makeText(view.getContext(), "Tag list full", Toast.LENGTH_SHORT).show();
-                }
-                else if(checkIfTagExist(holder, text)){
-                    Toast.makeText(view.getContext(), "Error, tag alreadt in list", Toast.LENGTH_SHORT).show();
-                }
-
-
-
-                //ads to it
-                else{
-                    //TODO FIX THIS
-                    //adds to the first empty spot
-                    holder= addToTagList(text, holder);
-                                    //set the new array as the new one
-                    picture.setTags(holder);
-                    //tagListRecylerAdapter.notifyDataSetChanged();
-                    Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
-                }
-
+            if(text.equals("")){
+                Toast.makeText(view.getContext(), "Error, no tag inputed try again", Toast.LENGTH_SHORT).show();
             }
+
+
+            else if(holder.length > 20){
+                Toast.makeText(view.getContext(), "Tag list full", Toast.LENGTH_SHORT).show();
+            }
+            else if(checkIfTagExist(holder, text)){
+                Toast.makeText(view.getContext(), "Error, tag alreadt in list", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            //ads to it
+            else{
+
+                holder= addToTagList(text, holder);
+
+                picture.setTags(holder);
+                tagListRecylerAdapter.notifyDataSetChanged();
+                Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
+            }
+
         });
 
-        DELETE_PICTURE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),
-                        "Picture Deleted",
-                        Toast.LENGTH_SHORT).show();
-                pictureRecycleAdapter.removePicture(position);
-            }
+        DELETE_PICTURE.setOnClickListener(view -> {
+            Toast.makeText(view.getContext(),
+                    "Picture Deleted",
+                    Toast.LENGTH_SHORT).show();
+            pictureRecycleAdapter.removePicture(position);
         });
 
     }
 
     private String[] addToTagList(String text, String[] holder) {
-        for(String e: holder){
-            if(e.equals("")){
-                e= text;
+        for(String tagToAdd: holder){
+            if(tagToAdd.equals("")){
+                tagToAdd= text;
                 return holder;
             }
         }
@@ -197,17 +166,17 @@ public class PictureSelectedActivity extends AppCompatActivity {
     private boolean checkIfTagExist(String[] holder, String tag) {
         if(holder != null && holder.length == 0) {return false;}
 
-        for(int i = 0; i <holder.length; i++){
-            if(holder[i].equals(tag.toLowerCase())){
-                postionInArray = i;
-                return true;}
+        assert holder != null;
+        for (String s : holder) {
+            if (s.equals(tag.toLowerCase())) {
+                return true;
+            }
         }
         return  false;
     }
 
     private void showAddInput() {
         editText.setVisibility(View.VISIBLE);
-        inpuText.setVisibility(View.VISIBLE);
         confirmAddTagBtn.setVisibility(View.VISIBLE);
         cancelBtn.setVisibility(View.VISIBLE);
         DELETE_PICTURE.setVisibility(View.INVISIBLE);
@@ -217,7 +186,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
     private void hideAddInput(){
         editText.setVisibility(View.INVISIBLE);
-        inpuText.setVisibility(View.INVISIBLE);
+
         confirmAddTagBtn.setVisibility(View.INVISIBLE);
         cancelBtn.setVisibility(View.INVISIBLE);
         confirmDeleteBtn.setVisibility(View.INVISIBLE);
@@ -228,7 +197,6 @@ public class PictureSelectedActivity extends AppCompatActivity {
     }
 
     private void showDeleteTagInput() {
-        inpuText.setVisibility(View.INVISIBLE);
         addTagBtn.setVisibility(View.INVISIBLE);
         removeTagBtn.setVisibility(View.INVISIBLE);
         DELETE_PICTURE.setVisibility(View.INVISIBLE);
@@ -242,12 +210,12 @@ public class PictureSelectedActivity extends AppCompatActivity {
         editText.setVisibility(View.INVISIBLE);
         cancelBtn.setVisibility(View.INVISIBLE);
 
-        inpuText.setVisibility(View.VISIBLE);
+
         DELETE_PICTURE.setVisibility(View.VISIBLE);
     }
 
     private void setUpRecycleView(String[] tagList){
-        tagListRecycleView = findViewById(R.id.tagRecyclerView);
+        RecyclerView tagListRecycleView = findViewById(R.id.tagRecyclerView);
 
         tagListRecycleView.setAdapter(new TagListRecylerAdapter(this, tagList));
         tagListRecycleView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -256,15 +224,15 @@ public class PictureSelectedActivity extends AppCompatActivity {
 
     public String[] sortList(String[] tagList){
         int count = 0;
-        for(int i = 0; i < tagList.length; i++){
-            if(!tagList[i].equals("")||!(tagList[i] == "")){
+        for (String s : tagList) {
+            if (!s.equals("") ) {
                 count++;
             }
         }
 
         String[] holder = new String[count];
         for(int i = 0; i < tagList.length; i++){
-            if(!tagList[i].equals("") || !(tagList[i] == "")){
+            if(!tagList[i].equals("")){
                 holder[i] = tagList[i];
             }
         }
