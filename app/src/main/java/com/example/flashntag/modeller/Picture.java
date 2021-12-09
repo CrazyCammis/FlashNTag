@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Picture {
 
+    private String uID;
     private String fileURL;
     private String[] tags ;
     private Date date;
@@ -24,7 +25,10 @@ public class Picture {
     }
 
 
+    public Picture(){
 
+
+    }
 
     //ImageID, Type, Descrition
     public Picture(int pictureID,  Date date, String[] tags, String fileURL ) {

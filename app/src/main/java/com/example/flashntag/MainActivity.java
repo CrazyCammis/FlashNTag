@@ -3,24 +3,21 @@ package com.example.flashntag;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.firebase.ui.auth.AuthUI;
+import com.example.flashntag.modeller.Picture;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
+
+
+    private FirebaseFirestore firestoreDb;
+    private CollectionReference pictuereCollectionReferencve;
 
     private  final int RC_SIGN_IN = 1;
 
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        firestoreDb = FirebaseFirestore.getInstance();
+        pictuereCollectionReferencve = firestoreDb.collection("pictures");
+        generateTestData();
+/*
         Button button = findViewById(R.id.signOutButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        auth = FirebaseAuth.getInstance();
+        auth = FirebaseAut h.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -81,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Signed in as " + currentUser.getDisplayName(), Toast.LENGTH_LONG).show();
                 }
             }
-        };
+        };*/
 
 
         openGallery = findViewById(R.id.openGallery);
@@ -109,6 +114,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void generateTestData() {
+
+        List<Picture> pictureToDb= Picture.getData("","");
+
+
+        for(Picture aPic : pictureToDb){
+            pictuereCollectionReferencve.add(aPic);
+        }
+
+
+
+    }
 
 
     @Override
