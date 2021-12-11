@@ -147,7 +147,15 @@ public class PictureSelectedActivity extends AppCompatActivity {
             Toast.makeText(view.getContext(),
                     "Picture Deleted",
                     Toast.LENGTH_SHORT).show();
-            pictureRecycleAdapter.removePicture(position);
+
+            Intent intentb = new Intent(view.getContext(), Viewer.class);
+
+
+            intentb.putExtra("activity","all");
+            intentb.putExtra("target","");
+            startActivity(intentb);
+
+            //pictureRecycleAdapter.removePicture(position);
         });
 
     }
@@ -204,14 +212,6 @@ public class PictureSelectedActivity extends AppCompatActivity {
         cancelBtn.setVisibility(View.VISIBLE);
         editText.setVisibility(View.VISIBLE);
         confirmDeleteBtn.setVisibility(View.VISIBLE);
-    }
-
-    private  void hideDeleteTagInput(){
-        editText.setVisibility(View.INVISIBLE);
-        cancelBtn.setVisibility(View.INVISIBLE);
-
-
-        DELETE_PICTURE.setVisibility(View.VISIBLE);
     }
 
     private void setUpRecycleView(String[] tagList){
