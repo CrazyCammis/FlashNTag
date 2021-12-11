@@ -137,7 +137,7 @@ public class PictureSelectedActivity extends AppCompatActivity {
                 holder= addToTagList(text, holder);
 
                 picture.setTags(holder);
-                tagListRecylerAdapter.notifyDataSetChanged();
+                //tagListRecylerAdapter.notifyDataSetChanged();
                 Toast.makeText(view.getContext(), "Tag added", Toast.LENGTH_SHORT).show();
             }
 
@@ -147,13 +147,13 @@ public class PictureSelectedActivity extends AppCompatActivity {
             Toast.makeText(view.getContext(),
                     "Picture Deleted",
                     Toast.LENGTH_SHORT).show();
-
             Intent intentb = new Intent(view.getContext(), Viewer.class);
 
 
             intentb.putExtra("activity","all");
             intentb.putExtra("target","");
             startActivity(intentb);
+
 
             //pictureRecycleAdapter.removePicture(position);
         });
